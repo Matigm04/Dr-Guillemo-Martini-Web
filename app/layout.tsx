@@ -5,9 +5,13 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'Dr. Guillermo Martini - Medicina Estética',
+  description: 'Clínica de medicina estética especializada en tratamientos faciales y rejuvenecimiento. Dr. Guillermo Martini, especialista en medicina estética con más de 15 años de experiencia.',
+  generator: 'Next.js',
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({

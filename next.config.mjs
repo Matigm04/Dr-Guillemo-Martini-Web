@@ -3,8 +3,8 @@ const nextConfig = {
   // Habilita la exportación estática
   output: 'export',
 
-  // El nombre de tu repositorio de GitHub
-  basePath: '/DR-GUILLERMO-MARTINI-WEB', 
+  // El nombre de tu repositorio de GitHub (comentado para desarrollo local)
+  // basePath: '/DR-GUILLERMO-MARTINI-WEB', 
 
   // Opcional: para que las imágenes funcionen correctamente
   images: {
