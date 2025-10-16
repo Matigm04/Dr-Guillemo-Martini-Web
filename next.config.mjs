@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Habilita la exportación estática
   output: 'export',
 
-  // El nombre de tu repositorio de GitHub (comentado para desarrollo local)
-  // basePath: '/DR-GUILLERMO-MARTINI-WEB', 
+  // Lee la variable de entorno BASE_PATH, si no existe, no usa nada.
+  basePath: process.env.BASE_PATH || '',
 
-  // Opcional: para que las imágenes funcionen correctamente
   images: {
     unoptimized: true,
   },
