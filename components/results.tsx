@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
+import Image from "next/image"
 
 export function Results() {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -75,21 +76,23 @@ export function Results() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <div className="grid md:grid-cols-2">
-                  <div className="relative">
-                    <img
+                  <div className="relative h-80 md:h-96">
+                    <Image
                       src={beforeAfter[currentSlide].before || "/placeholder.svg"}
                       alt="Antes del tratamiento"
-                      className="w-full h-80 md:h-96 object-cover"
+                      fill
+                      className="object-cover"
                     />
                     <div className="absolute top-4 left-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
                       ANTES
                     </div>
                   </div>
-                  <div className="relative">
-                    <img
+                  <div className="relative h-80 md:h-96">
+                    <Image
                       src={beforeAfter[currentSlide].after || "/placeholder.svg"}
                       alt="Después del tratamiento"
-                      className="w-full h-80 md:h-96 object-cover"
+                      fill
+                      className="object-cover"
                     />
                     <div className="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-sm">
                       DESPUÉS

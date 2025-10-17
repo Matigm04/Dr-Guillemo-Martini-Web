@@ -1,12 +1,19 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Star } from "lucide-react"
+import Image from "next/image"
 
 export function Hero() {
   return (
     <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img src="/elegant-aesthetic-clinic-treatment-room-with-moder.png" alt="Centro de Estética" className="w-full h-full object-cover" />
+        <Image 
+          src="/elegant-aesthetic-clinic-treatment-room-with-moder.png" 
+          alt="Centro de Estética" 
+          fill
+          className="object-cover"
+          priority
+        />
         <div className="absolute inset-0 bg-primary/20"></div>
       </div>
 
