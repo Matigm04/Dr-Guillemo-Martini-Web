@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Phone } from "lucide-react"
+import { Menu, X, Phone, Mail } from "lucide-react"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -33,11 +33,21 @@ export function Header() {
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
-            <div className="flex items-center text-sm text-muted-foreground">
+            <a 
+              href="https://wa.me/5493518596064" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
               <Phone className="w-4 h-4 mr-2" />
-              +54 11 1234-5678
-            </div>
-            <Button className="bg-secondary hover:bg-secondary/90">Agendar Cita</Button>
+              +54 9 3518 59-6064
+            </a>
+            <Button 
+              className="bg-secondary hover:bg-secondary/90"
+              onClick={() => window.open('https://www.tuturno.io/drguillermomartini', '_blank')}
+            >
+              Agendar Cita
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -62,7 +72,12 @@ export function Header() {
               <Link href="/contacto" className="text-foreground hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
                 Contacto
               </Link>
-              <Button className="bg-secondary hover:bg-secondary/90 w-full">Agendar Cita</Button>
+              <Button 
+                className="bg-secondary hover:bg-secondary/90 w-full"
+                onClick={() => window.open('https://www.tuturno.io/drguillermomartini', '_blank')}
+              >
+                Agendar Cita
+              </Button>
             </div>
           </nav>
         )}

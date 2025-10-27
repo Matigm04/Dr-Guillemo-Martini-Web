@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Star } from "lucide-react"
 import Image from "next/image"
@@ -31,7 +33,11 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg">
+            <Button 
+              size="lg" 
+              className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg"
+              onClick={() => window.open('https://www.tuturno.io/drguillermomartini', '_blank')}
+            >
               Agendar Consulta
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>

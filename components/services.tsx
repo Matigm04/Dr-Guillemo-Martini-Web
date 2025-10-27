@@ -503,7 +503,10 @@ export function Services() {
                       </p>
                     )}
                     
-                    <Button className="w-full bg-secondary hover:bg-secondary/90">
+                    <Button 
+                      className="w-full bg-secondary hover:bg-secondary/90"
+                      onClick={() => window.open('https://www.tuturno.io/drguillermomartini', '_blank')}
+                    >
                       Agendar Consulta
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
