@@ -7,8 +7,8 @@ export function Footer() {
         <div className="grid md:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4">Dr. Guillermo Martini</h3>
-            <p className="text-primary-foreground/80 mb-6 max-w-md">
+            <h3 className="text-2xl font-light mb-4 tracking-tight">Dr. Guillermo <span className="font-serif italic">Martini</span></h3>
+            <p className="text-primary-foreground/80 mb-6 max-w-md font-light">
               Medicina Estética en Córdoba. Botox - Rellenos - Bioestimuladores - PRP - Armonizaciones - Endolifting
             </p>
             <div className="flex space-x-4">

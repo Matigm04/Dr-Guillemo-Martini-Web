@@ -30,8 +30,8 @@ export function About() {
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">¿Por Qué Elegirnos?</h2>
-          <p className="text-lg text-muted-foreground text-pretty">
+          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">¿Por Qué <span className="font-serif italic text-emerald-600">Elegirnos?</span></h2>
+          <p className="text-lg text-gray-600 font-light leading-relaxed">
             Nuestro objetivo es realzar tu belleza natural utilizando las técnicas más avanzadas en medicina estética,
             siempre priorizando tu seguridad y satisfacción.
           </p>
@@ -39,13 +39,13 @@ export function About() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
-            <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+            <Card key={index} className="text-center hover:shadow-lg transition-shadow border-gray-100">
               <CardContent className="p-6">
-                <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-8 h-8 text-secondary" />
+                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <feature.icon className="w-8 h-8 text-emerald-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-card-foreground mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm">{feature.description}</p>
+                <h3 className="text-xl font-light text-gray-900 mb-3 tracking-tight">{feature.title}</h3>
+                <p className="text-gray-600 text-sm font-light leading-relaxed">{feature.description}</p>
               </CardContent>
             </Card>
           ))}

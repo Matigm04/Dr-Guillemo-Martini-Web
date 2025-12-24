@@ -1,5 +1,5 @@
 import { Header } from "@/components/header"
-import { Services } from "@/components/services"
+import { AllTreatmentsJourney } from "@/components/all-treatments-journey"
 import { Footer } from "@/components/footer"
 
 export const metadata = {
@@ -9,9 +9,11 @@ export const metadata = {
 
 export default function ServiciosPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-white">
       <Header />
-      <Services />
+      <div className="pt-20">
+        <AllTreatmentsJourney />
+      </div>
       <Footer />
     </main>
   )

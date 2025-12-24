@@ -12,8 +12,8 @@ export function Header() {
     <header className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-primary hover:text-primary/90 transition-colors">
-            ESTÉTICA CENTER
+          <Link href="/" className="text-2xl font-light text-gray-900 hover:text-emerald-600 transition-colors tracking-tight">
+            Dr. <span className="font-serif italic text-emerald-600">Martini</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -43,7 +43,7 @@ export function Header() {
               +54 9 3518 59-6064
             </a>
             <Button 
-              className="bg-secondary hover:bg-secondary/90"
+              className="bg-emerald-600 hover:bg-emerald-700 font-light"
               onClick={() => window.open('https://www.tuturno.io/drguillermomartini', '_blank')}
             >
               Agendar Cita
@@ -73,7 +73,7 @@ export function Header() {
                 Contacto
               </Link>
               <Button 
-                className="bg-secondary hover:bg-secondary/90 w-full"
+                className="bg-emerald-600 hover:bg-emerald-700 w-full font-light"
                 onClick={() => window.open('https://www.tuturno.io/drguillermomartini', '_blank')}
               >
                 Agendar Cita
