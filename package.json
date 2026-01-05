@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "cross-env BASE_PATH=/Dr-Guillermo-Martini-Web next build && node -e \"require('fs').writeFileSync('out/.nojekyll', '')\"",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
