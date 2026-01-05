@@ -13,7 +13,6 @@ interface TreatmentCardProps {
 
 export function TreatmentCard({ treatment, onClick }: TreatmentCardProps) {
   const [isHovered, setIsHovered] = useState(false)
-  const basePath = process.env.NODE_ENV === 'production' ? '/Dr-Guillermo-Martini-Web' : ''
 
   return (
     <motion.div
@@ -28,7 +27,7 @@ export function TreatmentCard({ treatment, onClick }: TreatmentCardProps) {
       <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
         {/* Before Image */}
         <Image
-          src={`${basePath}${treatment.imageBefore}`}
+          src={treatment.imageBefore}
           alt={`${treatment.nombre} - Antes`}
           fill
           className="object-cover"
@@ -42,7 +41,7 @@ export function TreatmentCard({ treatment, onClick }: TreatmentCardProps) {
           transition={{ duration: 0.5 }}
         >
           <Image
-            src={`${basePath}${treatment.imageAfter}`}
+            src={treatment.imageAfter}
             alt={`${treatment.nombre} - Después`}
             fill
             className="object-cover"

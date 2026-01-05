@@ -4,8 +4,6 @@ import { BeforeAfterSlider } from "@/components/before-after-slider"
 import { TestimonialCarousel } from "@/components/testimonial-carousel"
 
 export function Results() {
-  const basePath = process.env.NODE_ENV === 'production' ? '/Dr-Guillermo-Martini-Web' : ''
-
   const testimoniosEjemplo = [
     {
       nombre: "María González",
@@ -53,8 +51,8 @@ export function Results() {
             </p>
           </div>
           <BeforeAfterSlider 
-            imageBefore={`${basePath}/antes-ejemplo.jpg`}
-            imageAfter={`${basePath}/despues-ejemplo.jpg`}
+            imageBefore="/antes-ejemplo.jpg"
+            imageAfter="/despues-ejemplo.jpg"
             alt="Resultado de tratamiento de armonización facial"
           />
         </div>

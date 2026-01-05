@@ -8,8 +8,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { GraduationCap, Award, HeartPulse, Quote } from "lucide-react"
 
 export default function QuienSoyPage() {
-  const basePath = process.env.NODE_ENV === 'production' ? '/Dr-Guillermo-Martini-Web' : '';
-
   // Animation variants
   const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 40 },
@@ -71,7 +69,7 @@ export default function QuienSoyPage() {
               >
                 <div className="relative w-full max-w-md mx-auto lg:ml-auto aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
                   <Image
-                    src={`${basePath}/guille.JPEG`}
+                    src="/guille.JPEG"
                     alt="Dr. Guillermo Martini"
                     fill
                     className="object-cover"

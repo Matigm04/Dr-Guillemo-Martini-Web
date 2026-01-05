@@ -4,8 +4,6 @@ import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import Image from "next/image"
 
-const basePath = process.env.NODE_ENV === 'production' ? '/Dr-Guillermo-Martini-Web' : ''
-
 export function ArtBehindNeedle() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
@@ -13,22 +11,22 @@ export function ArtBehindNeedle() {
   // Imágenes macro para el grid
   const macroImages = [
     {
-      src: `${basePath}/macro-hands-precision.jpg`,
+      src: "/macro-hands-precision.jpg",
       alt: "Manos del Dr. Martini con precisión quirúrgica",
       position: "col-span-2"
     },
     {
-      src: `${basePath}/macro-vial-premium.jpg`,
+      src: "/macro-vial-premium.jpg",
       alt: "Vial de producto premium",
       position: "col-span-1"
     },
     {
-      src: `${basePath}/macro-injection-detail.jpg`,
+      src: "/macro-injection-detail.jpg",
       alt: "Detalle de técnica de inyección",
       position: "col-span-1"
     },
     {
-      src: `${basePath}/macro-facial-analysis.jpg`,
+      src: "/macro-facial-analysis.jpg",
       alt: "Análisis facial detallado",
       position: "col-span-2"
     }
@@ -69,12 +67,12 @@ export function ArtBehindNeedle() {
               muted
               playsInline
               className="absolute inset-0 w-full h-full object-cover"
-              poster={`${basePath}/doctor-analyzing-poster.jpg`}
+              poster="/doctor-analyzing-poster.jpg"
             >
-              <source src={`${basePath}/cinemagraph-doctor-analyzing.mp4`} type="video/mp4" />
+              <source src="/cinemagraph-doctor-analyzing.mp4" type="video/mp4" />
               {/* Fallback image if video doesn't load */}
               <Image
-                src={`${basePath}/doctor-analyzing-fallback.jpg`}
+                src="/doctor-analyzing-fallback.jpg"
                 alt="Dr. Guillermo Martini analizando rostro"
                 fill
                 className="object-cover"

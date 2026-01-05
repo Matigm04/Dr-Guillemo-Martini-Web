@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react"
 import Image from "next/image"
 
 export function Hero() {
-  const basePath = process.env.NODE_ENV === 'production' ? '/Dr-Guillermo-Martini-Web' : '';
   
   const handleWhatsAppClick = () => {
     const phoneNumber = '5491123456789'; // Reemplazar con el número real del Dr. Martini
@@ -18,7 +17,7 @@ export function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image 
-          src={`${basePath}/elegant-aesthetic-clinic-treatment-room-with-moder.png`}
+          src="/elegant-aesthetic-clinic-treatment-room-with-moder.png"
           alt="Medicina Estética de Autor" 
           fill
           className="object-cover"

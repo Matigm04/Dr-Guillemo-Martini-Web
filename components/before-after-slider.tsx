@@ -14,7 +14,6 @@ export function BeforeAfterSlider({ imageBefore, imageAfter, alt }: BeforeAfterS
   const [sliderPosition, setSliderPosition] = useState(50)
   const [isDragging, setIsDragging] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const basePath = process.env.NODE_ENV === 'production' ? '/Dr-Guillermo-Martini-Web' : ''
 
   const handleMove = (clientX: number) => {
     if (!containerRef.current) return
@@ -61,7 +60,7 @@ export function BeforeAfterSlider({ imageBefore, imageAfter, alt }: BeforeAfterS
       {/* After Image (Base) */}
       <div className="absolute inset-0">
         <Image
-          src={`${basePath}${imageAfter}`}
+          src={imageAfter}
           alt={`${alt} - Después`}
           fill
           className="object-cover"
@@ -75,7 +74,7 @@ export function BeforeAfterSlider({ imageBefore, imageAfter, alt }: BeforeAfterS
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
         <Image
-          src={`${basePath}${imageBefore}`}
+          src={imageBefore}
           alt={`${alt} - Antes`}
           fill
           className="object-cover"
