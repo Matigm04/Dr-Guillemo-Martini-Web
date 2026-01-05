@@ -161,58 +161,6 @@ export function ArtBehindNeedle() {
             ))}
           </div>
         </div>
-
-        {/* Philosophy Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-20 max-w-4xl mx-auto"
-        >
-          <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-lg border border-gray-100">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              {/* Principle 1 */}
-              <div className="space-y-3">
-                <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto">
-                  <svg className="w-8 h-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-medium text-gray-900">Análisis Profundo</h3>
-                <p className="text-sm text-gray-600 font-light leading-relaxed">
-                  Estudio detallado de proporciones, armonía facial y expectativas individuales
-                </p>
-              </div>
-
-              {/* Principle 2 */}
-              <div className="space-y-3">
-                <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto">
-                  <svg className="w-8 h-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-medium text-gray-900">Precisión Milimétrica</h3>
-                <p className="text-sm text-gray-600 font-light leading-relaxed">
-                  Técnicas avanzadas con productos de máxima calidad y certificación
-                </p>
-              </div>
-
-              {/* Principle 3 */}
-              <div className="space-y-3">
-                <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto">
-                  <svg className="w-8 h-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-medium text-gray-900">Resultados Naturales</h3>
-                <p className="text-sm text-gray-600 font-light leading-relaxed">
-                  Realzamos tu belleza sin alterar tu esencia ni exagerar rasgos
-                </p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
 
       {/* Decorative Elements */}

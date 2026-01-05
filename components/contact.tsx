@@ -5,10 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { MapPin, Phone, Mail, Clock, AlertCircle } from "lucide-react"
+import { MapPin, Phone, Clock, AlertCircle, MessageCircle } from "lucide-react"
 import { motion } from "framer-motion"
 
-// Array de servicios disponibles
+// Array de servicios disponibles (31 servicios)
 const SERVICIOS_DISPONIBLES = [
   "Consulta Estética",
   "Recuperación Capilar",
@@ -100,302 +100,357 @@ export function Contact() {
       setErrors({ ...errors, [field]: false })
     }
   }
+
   return (
-    <section id="contacto" className="py-20">
+    <section id="contacto" className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4">
+        {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">Agenda Tu Consulta</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 text-balance">
+            Central de Atención Médica
+          </h2>
           <p className="text-lg text-muted-foreground text-pretty">
-            Estamos aquí para ayudarte a alcanzar tus objetivos estéticos. Contáctanos para una consulta personalizada y
-            sin compromiso.
+            Coordinación inmediata de turnos y atención personalizada para todos tus tratamientos estéticos
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Information */}
+        {/* Main Grid: 2 Columns */}
+        <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+          
+          {/* LEFT COLUMN: Ubicaciones y Horarios */}
           <div className="space-y-6">
-            <Card>
+            
+            {/* Ubicaciones */}
+            <Card className="border-2 hover:border-emerald-200 transition-colors">
               <CardHeader>
-                <CardTitle className="flex items-center text-card-foreground">
-                  <MapPin className="w-5 h-5 mr-3 text-secondary" />
-                  Ubicaciones
+                <CardTitle className="flex items-center text-2xl">
+                  <MapPin className="w-6 h-6 mr-3 text-emerald-600" />
+                  Nuestras Sedes
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-3 text-muted-foreground">
-                  <div>
-                    <p className="font-semibold text-foreground">📍 Córdoba Capital</p>
-                    <p>Leopoldo Lugones 188</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground">📍 Río Tercero</p>
-                    <p>Consultorio disponible</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground">📍 Villa Mercedes</p>
-                    <p>Consultorio disponible</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center text-card-foreground">
-                  <Phone className="w-5 h-5 mr-3 text-secondary" />
-                  Teléfono / WhatsApp
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div>
-                    <a 
-                      href="tel:+5493518596064"
-                      className="text-lg font-semibold text-primary hover:underline"
-                    >
-                      +54 9 3518 59-6064
-                    </a>
-                  </div>
-                  <Button
-                    variant="outline"
-                    className="w-full border-green-500 text-green-600 hover:bg-green-50"
-                    onClick={() => window.open('https://wa.me/5493518596064?text=Hola,%20me%20gustaría%20consultar%20sobre%20los%20tratamientos', '_blank')}
-                  >
-                    <Phone className="w-4 h-4 mr-2" />
-                    Enviar WhatsApp
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center text-card-foreground">
-                  <Phone className="w-5 h-5 mr-3 text-secondary" />
-                  Sistema de Turnos
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-3">
-                  Agendá tu turno online de forma rápida y sencilla:
-                </p>
-                <Button
-                  className="w-full bg-primary hover:bg-primary/90"
-                  onClick={() => window.open('https://www.tuturno.io/drguillermomartini', '_blank')}
+              <CardContent className="space-y-6">
+                {/* Córdoba Capital */}
+                <motion.div 
+                  className="bg-emerald-50 p-5 rounded-2xl border border-emerald-100"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300 }}
                 >
-                  Agendar en TuTurno
-                </Button>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-lg text-emerald-900 mb-1">Córdoba Capital</h3>
+                      <p className="text-emerald-700 font-medium">Leopoldo Lugones 188</p>
+                      <p className="text-sm text-emerald-600 mt-2">Sede principal</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Río Tercero */}
+                <motion.div 
+                  className="bg-gray-50 p-5 rounded-2xl border border-gray-200"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-gray-300 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-6 h-6 text-gray-700" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-lg text-gray-900 mb-1">Río Tercero</h3>
+                      <p className="text-gray-700 font-medium">Consultorio disponible</p>
+                      <p className="text-sm text-gray-600 mt-2">Consultar disponibilidad</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Villa Mercedes */}
+                <motion.div 
+                  className="bg-gray-50 p-5 rounded-2xl border border-gray-200"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-gray-300 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-6 h-6 text-gray-700" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-lg text-gray-900 mb-1">Villa Mercedes</h3>
+                      <p className="text-gray-700 font-medium">Consultorio disponible</p>
+                      <p className="text-sm text-gray-600 mt-2">Consultar disponibilidad</p>
+                    </div>
+                  </div>
+                </motion.div>
               </CardContent>
             </Card>
 
-            <Card>
+            {/* Horarios de Atención */}
+            <Card className="border-2 hover:border-emerald-200 transition-colors">
               <CardHeader>
-                <CardTitle className="flex items-center text-card-foreground">
-                  <Mail className="w-5 h-5 mr-3 text-secondary" />
-                  Email
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  <a 
-                    href="mailto:dr.guillermomartini@gmail.com"
-                    className="text-primary hover:underline"
-                  >
-                    dr.guillermomartini@gmail.com
-                  </a>
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center text-card-foreground">
-                  <Clock className="w-5 h-5 mr-3 text-secondary" />
+                <CardTitle className="flex items-center text-2xl">
+                  <Clock className="w-6 h-6 mr-3 text-emerald-600" />
                   Horarios de Atención
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2 text-muted-foreground">
-                  <div className="flex justify-between">
-                    <span>Lunes:</span>
-                    <span className="font-medium text-foreground">10:00 - 19:00</span>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span className="font-medium text-gray-700">Lunes</span>
+                    <span className="font-bold text-emerald-600">10:00 - 19:00</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Martes:</span>
-                    <span className="font-medium text-foreground">10:00 - 19:00</span>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span className="font-medium text-gray-700">Martes</span>
+                    <span className="font-bold text-emerald-600">10:00 - 19:00</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Miércoles:</span>
-                    <span className="font-medium text-foreground">10:00 - 19:00</span>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span className="font-medium text-gray-700">Miércoles</span>
+                    <span className="font-bold text-emerald-600">10:00 - 19:00</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Jueves:</span>
-                    <span className="font-medium text-red-500">Cerrado</span>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span className="font-medium text-gray-700">Jueves</span>
+                    <span className="font-bold text-red-500">Cerrado</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Viernes:</span>
-                    <span className="font-medium text-foreground">10:00 - 19:00</span>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span className="font-medium text-gray-700">Viernes</span>
+                    <span className="font-bold text-emerald-600">10:00 - 19:00</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Sábado:</span>
-                    <span className="font-medium text-red-500">Cerrado</span>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span className="font-medium text-gray-700">Sábado</span>
+                    <span className="font-bold text-red-500">Cerrado</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Domingo:</span>
-                    <span className="font-medium text-red-500">Cerrado</span>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="font-medium text-gray-700">Domingo</span>
+                    <span className="font-bold text-red-500">Cerrado</span>
                   </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Mapa de Google */}
+            <Card className="overflow-hidden border-2">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Ubicación en Mapa</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0">
+                <div className="w-full h-64 bg-gray-200 relative">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.8277967890474!2d-64.18926092346839!3d-31.417103574280373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432a2f3b7e5c8a9%3A0x9d3e4b4c5b4c5b4c!2sLeopoldo%20Lugones%20188%2C%20C%C3%B3rdoba!5e0!3m2!1ses!2sar!4v1703449600000!5m2!1ses!2sar"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0"
+                  />
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Contact Form */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl text-card-foreground font-light tracking-tight">
-                Solicita tu <span className="font-serif italic text-emerald-600">Consulta</span>
-              </CardTitle>
-              <p className="text-muted-foreground font-light">Completa el formulario y nos pondremos en contacto contigo</p>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid md:grid-cols-2 gap-4">
+          {/* RIGHT COLUMN: Acción Inmediata + Formulario */}
+          <div className="space-y-6">
+            
+            {/* BOTÓN GIGANTE DE WHATSAPP */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Card className="border-4 border-emerald-500 bg-gradient-to-br from-emerald-50 to-emerald-100 shadow-2xl">
+                <CardContent className="p-8">
+                  <div className="text-center space-y-6">
+                    {/* Icono animado */}
+                    <motion.div
+                      animate={{ 
+                        scale: [1, 1.1, 1],
+                      }}
+                      transition={{ 
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatType: "reverse"
+                      }}
+                      className="inline-block"
+                    >
+                      <div className="w-24 h-24 bg-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-xl">
+                        <svg
+                          className="w-14 h-14 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                        </svg>
+                      </div>
+                    </motion.div>
+
+                    <div>
+                      <h3 className="text-3xl font-bold text-emerald-900 mb-3">
+                        ¡Agenda tu Turno Ahora!
+                      </h3>
+                      <p className="text-emerald-700 font-medium text-lg">
+                        Atención inmediata por secretaría para coordinación de turnos y consultas
+                      </p>
+                    </div>
+
+                    <Button
+                      size="lg"
+                      onClick={() => window.open('https://wa.me/5493518596064?text=Hola%2C%20quiero%20agendar%20un%20turno%20con%20el%20Dr.%20Martini', '_blank')}
+                      className="w-full h-16 text-xl font-bold bg-emerald-600 hover:bg-emerald-700 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                    >
+                      <MessageCircle className="w-6 h-6 mr-3" />
+                      Agendar Turno por WhatsApp
+                    </Button>
+
+                    <div className="flex items-center justify-center gap-2 text-emerald-700">
+                      <Phone className="w-5 h-5" />
+                      <span className="font-semibold text-lg">+54 9 3518 59-6064</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* FORMULARIO DE CONTACTO SECUNDARIO */}
+            <Card className="border border-gray-200">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg text-gray-700 font-normal">
+                  O completa el formulario de contacto
+                </CardTitle>
+                <p className="text-sm text-gray-500 font-light">
+                  Alternativa: Envíanos tus datos y te contactaremos
+                </p>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-sm font-medium text-gray-600 mb-1.5 block">Nombre</label>
+                      <Input 
+                        placeholder="Tu nombre" 
+                        value={formData.nombre}
+                        onChange={(e) => handleChange("nombre", e.target.value)}
+                        className={`h-11 ${errors.nombre ? "border-red-400" : ""}`}
+                      />
+                      {errors.nombre && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="flex items-center gap-1 mt-1"
+                        >
+                          <AlertCircle className="w-3 h-3 text-red-500" />
+                          <p className="text-xs text-red-500">Ingresa tu nombre</p>
+                        </motion.div>
+                      )}
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-gray-600 mb-1.5 block">Teléfono</label>
+                      <Input 
+                        placeholder="Tu teléfono" 
+                        value={formData.telefono}
+                        onChange={(e) => handleChange("telefono", e.target.value)}
+                        className={`h-11 ${errors.telefono ? "border-red-400" : ""}`}
+                      />
+                      {errors.telefono && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="flex items-center gap-1 mt-1"
+                        >
+                          <AlertCircle className="w-3 h-3 text-red-500" />
+                          <p className="text-xs text-red-500">Ingresa tu teléfono</p>
+                        </motion.div>
+                      )}
+                    </div>
+                  </div>
+
                   <div>
-                    <label className="text-sm font-medium text-foreground mb-2 block">Nombre</label>
+                    <label className="text-sm font-medium text-gray-600 mb-1.5 block">Email</label>
                     <Input 
-                      placeholder="Tu nombre completo" 
-                      value={formData.nombre}
-                      onChange={(e) => handleChange("nombre", e.target.value)}
-                      className={errors.nombre ? "border-red-400" : ""}
+                      type="email" 
+                      placeholder="tu@email.com" 
+                      value={formData.email}
+                      onChange={(e) => handleChange("email", e.target.value)}
+                      className={`h-11 ${errors.email ? "border-red-400" : ""}`}
                     />
-                    {errors.nombre && (
+                    {errors.email && (
                       <motion.div
                         initial={{ opacity: 0, y: -5 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-1 mt-1.5"
+                        className="flex items-center gap-1 mt-1"
                       >
-                        <AlertCircle className="w-3.5 h-3.5 text-red-500" />
-                        <p className="text-xs text-red-500 font-light">
-                          Por favor ingresa tu nombre
-                        </p>
+                        <AlertCircle className="w-3 h-3 text-red-500" />
+                        <p className="text-xs text-red-500">Ingresa un email válido</p>
                       </motion.div>
                     )}
                   </div>
+
                   <div>
-                    <label className="text-sm font-medium text-foreground mb-2 block">Teléfono</label>
-                    <Input 
-                      placeholder="Tu número de teléfono" 
-                      value={formData.telefono}
-                      onChange={(e) => handleChange("telefono", e.target.value)}
-                      className={errors.telefono ? "border-red-400" : ""}
-                    />
-                    {errors.telefono && (
+                    <label className="text-sm font-medium text-gray-600 mb-1.5 block">Tratamiento de Interés</label>
+                    <select 
+                      className={`w-full h-11 px-3 rounded-lg border ${
+                        errors.tratamiento ? "border-red-400" : "border-input"
+                      } bg-background focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none text-sm`}
+                      value={formData.tratamiento}
+                      onChange={(e) => handleChange("tratamiento", e.target.value)}
+                    >
+                      <option value="">Selecciona un tratamiento...</option>
+                      {SERVICIOS_DISPONIBLES.map((servicio, index) => (
+                        <option key={index} value={servicio}>
+                          {servicio}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.tratamiento && (
                       <motion.div
                         initial={{ opacity: 0, y: -5 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-1 mt-1.5"
+                        className="flex items-center gap-1 mt-1"
                       >
-                        <AlertCircle className="w-3.5 h-3.5 text-red-500" />
-                        <p className="text-xs text-red-500 font-light">
-                          Por favor ingresa tu teléfono
-                        </p>
+                        <AlertCircle className="w-3 h-3 text-red-500" />
+                        <p className="text-xs text-red-500">Selecciona un tratamiento</p>
                       </motion.div>
                     )}
                   </div>
-                </div>
 
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-2 block">Email</label>
-                  <Input 
-                    type="email" 
-                    placeholder="tu@email.com" 
-                    value={formData.email}
-                    onChange={(e) => handleChange("email", e.target.value)}
-                    className={errors.email ? "border-red-400" : ""}
-                  />
-                  {errors.email && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center gap-1 mt-1.5"
-                    >
-                      <AlertCircle className="w-3.5 h-3.5 text-red-500" />
-                      <p className="text-xs text-red-500 font-light">
-                        Por favor ingresa un email válido
-                      </p>
-                    </motion.div>
-                  )}
-                </div>
+                  <div>
+                    <label className="text-sm font-medium text-gray-600 mb-1.5 block">Mensaje</label>
+                    <Textarea 
+                      placeholder="Cuéntanos sobre tu consulta..." 
+                      rows={3} 
+                      value={formData.mensaje}
+                      onChange={(e) => handleChange("mensaje", e.target.value)}
+                      className={`resize-none ${errors.mensaje ? "border-red-400" : ""}`}
+                    />
+                    {errors.mensaje && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-center gap-1 mt-1"
+                      >
+                        <AlertCircle className="w-3 h-3 text-red-500" />
+                        <p className="text-xs text-red-500">Escribe un mensaje</p>
+                      </motion.div>
+                    )}
+                  </div>
 
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-2 block">Tratamiento de Interés</label>
-                  <select 
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.tratamiento ? "border-red-400" : "border-border"
-                    } bg-input focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all outline-none font-light text-foreground`}
-                    value={formData.tratamiento}
-                    onChange={(e) => handleChange("tratamiento", e.target.value)}
+                  <Button 
+                    type="submit" 
+                    className="w-full h-12 bg-gray-700 hover:bg-gray-800 transition-all"
                   >
-                    <option value="">Selecciona un tratamiento</option>
-                    {SERVICIOS_DISPONIBLES.map((servicio, index) => (
-                      <option key={index} value={servicio}>
-                        {servicio}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.tratamiento && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center gap-1 mt-1.5"
+                    <svg 
+                      className="w-5 h-5 mr-2" 
+                      fill="currentColor" 
+                      viewBox="0 0 24 24"
                     >
-                      <AlertCircle className="w-3.5 h-3.5 text-red-500" />
-                      <p className="text-xs text-red-500 font-light">
-                        Por favor selecciona un tratamiento
-                      </p>
-                    </motion.div>
-                  )}
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-2 block">Mensaje</label>
-                  <Textarea 
-                    placeholder="Cuéntanos sobre tus objetivos y expectativas..." 
-                    rows={4} 
-                    value={formData.mensaje}
-                    onChange={(e) => handleChange("mensaje", e.target.value)}
-                    className={errors.mensaje ? "border-red-400" : ""}
-                  />
-                  {errors.mensaje && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center gap-1 mt-1.5"
-                    >
-                      <AlertCircle className="w-3.5 h-3.5 text-red-500" />
-                      <p className="text-xs text-red-500 font-light">
-                        Por favor escribe un mensaje
-                      </p>
-                    </motion.div>
-                  )}
-                </div>
-
-                <Button 
-                  type="submit" 
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 transition-all duration-300 shadow-lg hover:shadow-emerald-500/50"
-                >
-                  <svg 
-                    className="w-5 h-5 mr-2" 
-                    fill="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                  </svg>
-                  Enviar por WhatsApp
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Enviar por WhatsApp
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </section>
