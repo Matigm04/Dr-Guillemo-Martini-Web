@@ -226,35 +226,6 @@ function About() {
         )}
       </AnimatePresence>
 
-      {/* Stats */}
-      <section className="py-20 px-6 bg-brand-white/80 border-y border-brand-primary/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-12">
-            {[
-              { number: '5000+', label: 'Pacientes Satisfechos' },
-              { number: '15+', label: 'Años de Trayectoria' },
-              { number: '98%', label: 'Recomendación' }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center"
-              >
-                <p className="text-6xl md:text-7xl font-serif text-brand-primary italic mb-4">
-                  {stat.number}
-                </p>
-                <p className="text-brand-primary/70 text-lg uppercase tracking-wider">
-                  {stat.label}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );
