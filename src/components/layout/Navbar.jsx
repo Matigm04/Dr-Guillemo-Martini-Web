@@ -10,13 +10,8 @@ const Navbar = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY < lastScrollY || currentScrollY < 10) {
-        // Scrolling up or at the top
-        setIsVisible(true);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down and past threshold
-        setIsVisible(false);
-      }
+      // Mantener siempre visible, solo detectar scroll para efectos de fondo si es necesario
+      setIsVisible(true);
 
       setLastScrollY(currentScrollY);
     };

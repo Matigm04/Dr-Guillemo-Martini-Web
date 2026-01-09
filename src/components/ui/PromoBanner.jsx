@@ -107,10 +107,10 @@ const PromoBanner = () => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden"
+              className="relative bg-white w-full max-w-sm md:max-w-2xl rounded-3xl shadow-2xl overflow-hidden"
             >
               {/* Header con gradiente */}
-              <div className="bg-gradient-to-r from-pink-500 via-red-500 to-pink-600 p-8 text-white">
+              <div className="bg-gradient-to-r from-pink-500 via-red-500 to-pink-600 p-4 md:p-8 text-white">
                 <button
                   onClick={() => setShowModal(false)}
                   className="absolute top-6 right-6 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
@@ -123,19 +123,19 @@ const PromoBanner = () => {
                     <Gift className="w-8 h-8" />
                   </div>
                   <div>
-                    <p className="text-white/90 text-sm uppercase tracking-wider mb-1">Promoción Especial</p>
-                    <h2 className="text-4xl font-serif">{promo.title}</h2>
+                    <p className="text-white/90 text-xs md:text-sm uppercase tracking-wider mb-1">Promoción Especial</p>
+                    <h2 className="text-2xl md:text-4xl font-serif">{promo.title}</h2>
                   </div>
                 </div>
               </div>
 
               {/* Contenido */}
-              <div className="p-8">
+              <div className="p-4 md:p-8">
                 <div className="mb-6">
-                  <h3 className="text-2xl font-serif text-brand-primary mb-3">
+                  <h3 className="text-xl md:text-2xl font-serif text-brand-primary mb-3">
                     {promo.description}
                   </h3>
-                  <p className="text-brand-primary/70 text-lg leading-relaxed">
+                  <p className="text-brand-primary/70 text-sm md:text-lg leading-relaxed">
                     {promo.details}
                   </p>
                 </div>

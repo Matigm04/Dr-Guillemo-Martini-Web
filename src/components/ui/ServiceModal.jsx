@@ -39,7 +39,7 @@ export function ServiceModal({ treatment, isOpen, onClose }) {
                     exit={{ scale: 0.95, opacity: 0, y: 20 }}
                     onClick={(e) => e.stopPropagation()}
                     transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="relative w-full max-w-6xl h-full md:max-h-[90vh] bg-white md:rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row"
+                    className="relative w-[90%] max-w-6xl max-h-[85vh] md:max-h-[90vh] bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row m-auto"
                 >
                      {/* Close Button */}
                     <button

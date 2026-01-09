@@ -22,3 +22,43 @@
     @apply font-serif;
   }
 }
+
+/* --- ELIMINAR MARCA DE AGUA ELFSIGHT (FUERZA BRUTA) --- */
+
+/* 1. Ocultar el enlace específico de la marca de agua */
+div[class*="elfsight-app"] a[href*="elfsight.com"], 
+div[class*="elfsight-app"] a[href*="utm_campaign"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    z-index: -9999 !important;
+}
+
+/* 2. Ocultar el contenedor extra que suele envolver al botón */
+div[class*="elfsight-app"] > div:last-child:has(a[href*="elfsight.com"]) {
+    display: none !important;
+}
+
+/* 3. Ocultar cualquier elemento con texto "Free Instagram" o "Elfsight" */
+div[class*="elfsight-app"] div:has(a[href*="elfsight"]) {
+    display: none !important;
+}
+
+/* 4. Selector genérico para enlaces de marca de agua */
+a[href*="elfsight.com"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+
+/* 5. Ocultar el último div del widget específico */
+.elfsight-app-0091be0e-1e24-4763-9cb2-673a423e25ca > div:last-child {
+    display: none !important;
+}
