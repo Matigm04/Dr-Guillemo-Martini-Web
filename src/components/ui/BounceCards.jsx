@@ -25,12 +25,15 @@ export default function BounceCards({
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.card',
-        { scale: 0 },
+        { scale: 0, opacity: 0 },
         {
           scale: 1,
+          opacity: 1,
           stagger: animationStagger,
           ease: easeType,
-          delay: animationDelay
+          delay: animationDelay,
+          force3D: true, // GPU acceleration
+          transformOrigin: "center center"
         }
       );
     }, containerRef);
@@ -77,7 +80,8 @@ export default function BounceCards({
           transform: noRotationTransform,
           duration: 0.4,
           ease: 'back.out(1.4)',
-          overwrite: 'auto'
+          overwrite: 'auto',
+          force3D: true
         });
       } else {
         const offsetX = i < hoveredIdx ? -160 : 160;
@@ -91,7 +95,8 @@ export default function BounceCards({
           duration: 0.4,
           ease: 'back.out(1.4)',
           delay,
-          overwrite: 'auto'
+          overwrite: 'auto',
+          force3D: true
         });
       }
     });
@@ -110,7 +115,8 @@ export default function BounceCards({
         transform: baseTransform,
         duration: 0.4,
         ease: 'back.out(1.4)',
-        overwrite: 'auto'
+        overwrite: 'auto',
+        force3D: true
       });
     });
   };
@@ -135,7 +141,13 @@ export default function BounceCards({
           onMouseEnter={() => pushSiblings(idx)}
           onMouseLeave={resetSiblings}
         >
-          <img className="image" src={src} alt={`card-${idx}`} />
+          <img 
+            className="image" 
+            src={src} 
+            alt={`card-${idx}`} 
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       ))}
     </div>

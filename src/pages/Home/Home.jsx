@@ -19,7 +19,6 @@ const Home = () => {
         <Hero />
         <Treatments />
         <InstagramStories />
-        <FooterCTA />
       </main>
 
       <FloatingContact />

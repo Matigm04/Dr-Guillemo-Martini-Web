@@ -22,6 +22,8 @@ export function ServiceCard({ treatment, onClick }) {
             src={treatment.imageBefore}
             alt={`${treatment.title} - Antes`}
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
         </div>
         
@@ -36,6 +38,8 @@ export function ServiceCard({ treatment, onClick }) {
             src={treatment.imageAfter}
             alt={`${treatment.title} - Después`}
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
         </motion.div>
 

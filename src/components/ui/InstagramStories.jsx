@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { Instagram } from 'lucide-react';
 
-const InstagramStories = () => {
+const InstagramStories = memo(() => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -40,6 +40,8 @@ const InstagramStories = () => {
                 src={profile?.profilePictureUrl || "/images/perfil-doctor.jpg"} 
                 alt="Dr. Guillermo Martini" 
                 className="w-full h-full rounded-full object-cover border-2 border-white"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -123,6 +125,8 @@ const InstagramStories = () => {
                     src={post.mediaUrl} 
                     alt="Instagram Post" 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                    decoding="async"
                   />
                 )}
                 
@@ -147,6 +151,8 @@ const InstagramStories = () => {
       </div>
     </section>
   );
-};
+});
+
+InstagramStories.displayName = 'InstagramStories';
 
 export default InstagramStories;

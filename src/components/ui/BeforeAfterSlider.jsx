@@ -55,6 +55,8 @@ export function BeforeAfterSlider({ imageBefore, imageAfter, alt }) {
           alt={`${alt} - Después`}
           className="object-cover w-full h-full"
           draggable={false}
+          loading="lazy"
+          decoding="async"
         />
       </div>
 
@@ -68,6 +70,8 @@ export function BeforeAfterSlider({ imageBefore, imageAfter, alt }) {
           alt={`${alt} - Antes`}
           className="object-cover w-full h-full"
           draggable={false}
+          loading="lazy"
+          decoding="async"
         />
       </div>
 

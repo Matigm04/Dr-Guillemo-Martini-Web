@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import BounceCards from '../../../components/ui/BounceCards';
 
 // Datos de tratamientos
@@ -78,9 +78,10 @@ const Treatments = () => {
         
         {/* Título */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-brand-primary italic mb-4">
@@ -96,10 +97,10 @@ const Treatments = () => {
           {treatments.map((treatment, index) => (
             <motion.div
               key={treatment.id}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.15, duration: 0.6 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ delay: index * 0.08, duration: 0.4 }}
               className="flex flex-col items-center"
             >
               {/* BounceCards */}
@@ -133,21 +134,6 @@ const Treatments = () => {
           ))}
         </div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6 }}
-          className="text-center mt-16"
-        >
-          <a
-            href="/contacto"
-            className="inline-block bg-brand-primary text-brand-white px-10 py-4 rounded-full text-sm uppercase tracking-widest font-bold hover:scale-105 transition-transform shadow-lg shadow-brand-primary/20"
-          >
-            Agendar Consulta
-          </a>
-        </motion.div>
       </div>
     </section>
   );

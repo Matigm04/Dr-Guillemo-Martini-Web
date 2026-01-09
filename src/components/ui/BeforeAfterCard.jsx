@@ -19,14 +19,18 @@ const BeforeAfterCard = ({ caseData, onOpenDetails }) => {
         <img 
           src={caseData.beforeImg} 
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" 
-          alt="Antes" 
+          alt="Antes"
+          loading="lazy"
+          decoding="async" 
         />
         
         {/* Imagen Después - Se muestra al hacer hover */}
         <img 
           src={caseData.afterImg} 
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-          alt="Después" 
+          alt="Después"
+          loading="lazy"
+          decoding="async" 
         />
 
         {/* Badges */}

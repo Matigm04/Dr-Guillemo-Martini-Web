@@ -107,32 +107,32 @@ const PromoBanner = () => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white w-full max-w-sm md:max-w-2xl rounded-3xl shadow-2xl overflow-hidden"
+              className="relative bg-white w-[90%] max-w-sm md:max-w-2xl max-h-[85vh] overflow-y-auto rounded-3xl shadow-2xl m-auto"
             >
               {/* Header con gradiente */}
               <div className="bg-gradient-to-r from-pink-500 via-red-500 to-pink-600 p-4 md:p-8 text-white">
                 <button
                   onClick={() => setShowModal(false)}
-                  className="absolute top-6 right-6 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+                  className="absolute top-3 right-3 md:top-6 md:right-6 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors z-10"
                 >
-                  <X className="w-6 h-6 text-white" />
+                  <X className="w-5 h-5 md:w-6 md:h-6 text-white" />
                 </button>
                 
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                    <Gift className="w-8 h-8" />
+                <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Gift className="w-6 h-6 md:w-8 md:h-8" />
                   </div>
                   <div>
                     <p className="text-white/90 text-xs md:text-sm uppercase tracking-wider mb-1">Promoción Especial</p>
-                    <h2 className="text-2xl md:text-4xl font-serif">{promo.title}</h2>
+                    <h2 className="text-xl md:text-4xl font-serif">{promo.title}</h2>
                   </div>
                 </div>
               </div>
 
               {/* Contenido */}
               <div className="p-4 md:p-8">
-                <div className="mb-6">
-                  <h3 className="text-xl md:text-2xl font-serif text-brand-primary mb-3">
+                <div className="mb-4 md:mb-6">
+                  <h3 className="text-lg md:text-2xl font-serif text-brand-primary mb-2 md:mb-3">
                     {promo.description}
                   </h3>
                   <p className="text-brand-primary/70 text-sm md:text-lg leading-relaxed">
@@ -140,11 +140,11 @@ const PromoBanner = () => {
                   </p>
                 </div>
 
-                <div className="bg-brand-primary/5 p-6 rounded-2xl mb-6">
-                  <h4 className="text-sm uppercase tracking-wider text-brand-primary/60 font-bold mb-3">
+                <div className="bg-brand-primary/5 p-4 md:p-6 rounded-2xl mb-4 md:mb-6">
+                  <h4 className="text-xs md:text-sm uppercase tracking-wider text-brand-primary/60 font-bold mb-2 md:mb-3">
                     Términos y Condiciones
                   </h4>
-                  <ul className="space-y-2 text-brand-primary/70">
+                  <ul className="space-y-1 md:space-y-2 text-xs md:text-base text-brand-primary/70">
                     {promo.terms.map((term, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <span className="text-brand-primary mt-1">•</span>
@@ -155,17 +155,17 @@ const PromoBanner = () => {
                 </div>
 
                 {/* CTA */}
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                   <a
                     href="/contacto"
                     onClick={() => setShowModal(false)}
-                    className="flex-1 bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white text-center px-8 py-4 rounded-full font-bold text-sm uppercase tracking-widest transition-all shadow-lg hover:scale-105"
+                    className="flex-1 bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white text-center px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-xs md:text-sm uppercase tracking-widest transition-all shadow-lg hover:scale-105"
                   >
                     Agendar Turno
                   </a>
                   <button
                     onClick={() => setShowModal(false)}
-                    className="flex-1 border-2 border-brand-primary/20 text-brand-primary text-center px-8 py-4 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-brand-primary/5 transition-all"
+                    className="flex-1 border-2 border-brand-primary/20 text-brand-primary text-center px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-xs md:text-sm uppercase tracking-widest hover:bg-brand-primary/5 transition-all"
                   >
                     Volver
                   </button>

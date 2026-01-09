@@ -21,6 +21,33 @@
   h1, h2, h3 {
     @apply font-serif;
   }
+
+  /* ========================================
+     OPTIMIZACIONES DE RENDIMIENTO CRÍTICAS
+     ======================================== */
+  
+  /* GPU Acceleration para elementos animados */
+  img, video {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Suavizar animaciones y transiciones */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Optimizar scroll performance */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Reducir layout shifts */
+  img[loading="lazy"] {
+    content-visibility: auto;
+  }
 }
 
 /* --- ELIMINAR MARCA DE AGUA ELFSIGHT (FUERZA BRUTA) --- */
