@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@300;400;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #43533D;    /* Verde Bosque del Logo */
+  --color-brand-bg-nav: #ccd2c6;     /* EL COLOR QUE PEDISTE */
+  --color-brand-bg: #CED4CA;         /* Fondo General */
+  --color-brand-white: #F4F5F2;      /* Blanco roto/Crema */
+
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Montserrat", sans-serif;
+}
+
+@layer base {
+  body {
+    /* El verde bosque oscuro del logo para todo el texto legible */
+    @apply bg-brand-bg text-brand-primary font-sans antialiased selection:bg-brand-primary selection:text-brand-white;
+  }
+  
+  /* Forzamos que los títulos usen la Serif elegante */
+  h1, h2, h3 {
+    @apply font-serif;
+  }
+}
