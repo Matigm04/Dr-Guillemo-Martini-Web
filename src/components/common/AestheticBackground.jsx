@@ -1,64 +1,56 @@
-import { motion } from 'framer-motion';
+import { memo } from 'react';
 
-const AestheticBackground = () => {
+const AestheticBackground = memo(() => {
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden bg-brand-bg">
-      {/* 1. TEXTURA DE RUIDO ANALÓGICO (Crucial para eliminar lo "liso") */}
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-b from-brand-bg via-brand-bg to-brand-bg/80">
+      {/* 1. TEXTURA DE RUIDO ANALÓGICO */}
       <div className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-multiply" 
            style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/asfalt-dark.png")` }}>
       </div>
 
-      {/* 2. LUCES ORGÁNICAS EN MOVIMIENTO (Mesh Gradient) */}
-      {/* Mancha Verde Bosque */}
-      <motion.div 
-        animate={{ 
-          x: [0, 100, -50, 0],
-          y: [0, -50, 50, 0],
-          scale: [1, 1.2, 0.9, 1] 
+      {/* 2. LUCES ORGÁNICAS ESTÁTICAS - Sin blur, usando opacity y gradientes */}
+      {/* Mancha Verde Superior Izquierda */}
+      <div 
+        className="absolute -top-[15%] left-[5%] w-[65vw] h-[65vw] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(132, 189, 167, 0.15) 0%, transparent 70%)',
+          willChange: 'auto'
         }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute -top-[20%] -left-[10%] w-[70vw] h-[70vw] bg-brand-primary/15 blur-[120px] rounded-full"
       />
 
-      {/* Mancha Verde Oliva */}
-      <motion.div 
-        animate={{ 
-          x: [0, -100, 50, 0],
-          y: [0, 100, -50, 0],
-          scale: [1, 1.3, 1.1, 1] 
+      {/* Mancha Verde Superior Derecha */}
+      <div 
+        className="absolute -top-[10%] right-[10%] w-[60vw] h-[60vw] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(157, 192, 139, 0.10) 0%, transparent 70%)',
+          willChange: 'auto'
         }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[20%] -right-[20%] w-[60vw] h-[60vw] bg-brand-secondary/10 blur-[150px] rounded-full"
       />
 
-      {/* Destello de Luz clara */}
-      <div className="absolute bottom-[-10%] left-[20%] w-[50vw] h-[50vw] bg-brand-white/40 blur-[100px] rounded-full opacity-50" />
-      
-      {/* Manchas adicionales para más profundidad */}
-      <motion.div 
-        animate={{ 
-          x: [0, 60, -30, 0],
-          y: [0, -80, 40, 0],
-          scale: [1, 1.15, 1.05, 1] 
+      {/* Mancha Centro */}
+      <div 
+        className="absolute top-[35%] left-[15%] w-[55vw] h-[55vw] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(132, 189, 167, 0.12) 0%, transparent 70%)',
+          willChange: 'auto'
         }}
-        transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[60%] left-[10%] w-[45vw] h-[45vw] bg-brand-primary/8 blur-[130px] rounded-full"
+      />
+
+      {/* Destello de Luz inferior */}
+      <div 
+        className="absolute bottom-[-5%] left-[25%] w-[50vw] h-[50vw] rounded-full opacity-50"
+        style={{
+          background: 'radial-gradient(circle, rgba(240, 242, 238, 0.35) 0%, transparent 70%)',
+          willChange: 'auto'
+        }}
       />
       
-      <motion.div 
-        animate={{ 
-          x: [0, -70, 35, 0],
-          y: [0, 90, -45, 0],
-          rotate: [0, 180, 360]
-        }}
-        transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[10%] right-[30%] w-[40vw] h-[40vw] bg-brand-white/20 blur-[110px] rounded-full"
-      />
-      
-      {/* 3. CAPA DE GRADIENTE VIGNETTE (Para centrar la atención) */}
-      <div className="absolute inset-0 bg-radial-[at_center_center] from-transparent via-transparent to-brand-primary/5" />
+      {/* 3. GRADIENTE VERTICAL DE ARRIBA A ABAJO */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-primary/3 to-brand-primary/8" />
     </div>
   );
-};
+});
+
+AestheticBackground.displayName = 'AestheticBackground';
 
 export default AestheticBackground;

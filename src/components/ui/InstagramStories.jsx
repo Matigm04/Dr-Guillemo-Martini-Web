@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, memo, useMemo } from 'react';
 import { Instagram } from 'lucide-react';
 
 const InstagramStories = memo(() => {
@@ -9,12 +9,27 @@ const InstagramStories = memo(() => {
   const BEHOLD_URL = 'https://feeds.behold.so/3aelUvw7MKYcdnHLSKnI';
 
   useEffect(() => {
+    // Verificar si ya tenemos datos en cache (sessionStorage)
+    const cachedData = sessionStorage.getItem('instagram-feed');
+    const cacheTime = sessionStorage.getItem('instagram-feed-time');
+    const now = Date.now();
+    
+    // Si el cache tiene menos de 5 minutos, usarlo
+    if (cachedData && cacheTime && (now - parseInt(cacheTime)) < 300000) {
+      setProfile(JSON.parse(cachedData));
+      setLoading(false);
+      return;
+    }
+
     const fetchInstagram = async () => {
       try {
         const response = await fetch(BEHOLD_URL);
         const data = await response.json();
         
-        // Guardamos todo el objeto (perfil + posts)
+        // Guardar en cache
+        sessionStorage.setItem('instagram-feed', JSON.stringify(data));
+        sessionStorage.setItem('instagram-feed-time', now.toString());
+        
         setProfile(data);
         setLoading(false);
       } catch (error) {

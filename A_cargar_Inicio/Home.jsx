@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import Navbar from '../../components/layout/Navbar';
 import Hero from './components/Hero';
 import FloatingContact from '../../components/common/FloatingContact';

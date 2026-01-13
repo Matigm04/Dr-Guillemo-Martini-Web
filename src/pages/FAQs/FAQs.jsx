@@ -1,199 +1,168 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
+import { Plus, Minus, ArrowRight } from 'lucide-react';
 import Navbar from '../../components/layout/Navbar';
 import Footer from '../../components/layout/Footer';
 import FloatingContact from '../../components/common/FloatingContact';
-import AestheticBackground from '../../components/common/AestheticBackground';
+import OptimizedImage from '../../components/common/OptimizedImage';
 
-const faqData = [
+// DATOS: Asociamos cada pregunta con su "Placa" específica
+const FAQS = [
   {
     id: 1,
-    category: 'tratamientos',
-    question: '¿Los tratamientos son dolorosos?',
-    answer: 'La mayoría de nuestros tratamientos son mínimamente invasivos y se realizan con anestesia tópica o local según sea necesario. Trabajamos para que tu experiencia sea lo más cómoda posible. Cada persona tiene diferente umbral de dolor, pero nuestros pacientes reportan molestias muy leves y manejables.'
+    question: "¿Qué es el Skin Booster y qué beneficios tiene?",
+    answer: "Es un tratamiento de hidratación profunda que mejora la calidad de la piel desde adentro. A diferencia de las cremas, penetra en capas profundas devolviendo luminosidad y suavidad. No cambia tus facciones, solo perfecciona tu piel.",
+    image: "/images/faq-skinbooster.jpg", // Usa la imagen_b43f73.jpg
+    category: "Tratamientos"
   },
   {
     id: 2,
-    category: 'tratamientos',
-    question: '¿Cuánto duran los efectos de los tratamientos?',
-    answer: 'La duración varía según el tipo de tratamiento. Por ejemplo, el ácido hialurónico dura entre 12-18 meses, mientras que tratamientos como limpiezas faciales requieren mantenimiento mensual. En tu consulta personalizada te explicaremos en detalle la duración específica de cada procedimiento.'
+    question: "¿Qué significa el efecto 'Glass Skin'?",
+    answer: "Es el resultado de una piel sana, hidratada y uniforme que refleja la luz naturalmente. Se logra combinando tratamientos de hidratación, peelings y cuidados domiciliarios específicos.",
+    image: "/images/faq-glass-skin.jpg", // Usa la imagen_b43f72.jpg
+    category: "Tendencias"
   },
   {
     id: 3,
-    category: 'recuperacion',
-    question: '¿Cuánto tiempo de recuperación necesito?',
-    answer: 'La mayoría de nuestros tratamientos no quirúrgicos permiten retomar actividades normales de inmediato o al día siguiente. Algunos procedimientos pueden presentar leve enrojecimiento o inflamación que desaparece en 24-48 horas. Te daremos indicaciones específicas para cada caso.'
+    question: "¿Cómo sé si un tratamiento es para mí?",
+    answer: "Cada rostro es único. Por eso realizamos un diagnóstico facial completo antes de cualquier procedimiento para diseñar un plan a tu medida, respetando tu anatomía y objetivos.",
+    image: "/images/faq-consulta.jpg", // Usa la imagen_b43f70.png
+    category: "Consultas"
   },
   {
     id: 4,
-    category: 'recuperacion',
-    question: '¿Qué cuidados debo tener después del tratamiento?',
-    answer: 'Los cuidados varían según el procedimiento, pero generalmente incluyen: evitar exposición solar directa, no maquillarse las primeras horas, hidratar bien la piel, y seguir las indicaciones médicas específicas. Te entregamos un protocolo escrito de cuidados post-tratamiento.'
+    question: "¿Cuánto tiempo de recuperación necesito?",
+    answer: "La mayoría de nuestros tratamientos son ambulatorios y te permiten volver a tu rutina de inmediato. En casos de rellenos o Botox, puede haber una leve inflamación que desaparece en 24-48hs.",
+    image: "/images/faq-general.jpg", // Una imagen genérica o repetida si no hay placa
+    category: "General"
   },
-  {
-    id: 5,
-    category: 'costos',
-    question: '¿Cuál es el costo de los tratamientos?',
-    answer: 'Cada tratamiento tiene un costo diferente según la complejidad, productos utilizados y zona a tratar. En tu primera consulta evaluamos tu caso particular y te brindamos un presupuesto personalizado. Contamos con opciones de financiación para que puedas acceder al tratamiento que necesitás.'
-  },
-  {
-    id: 6,
-    category: 'costos',
-    question: '¿Aceptan obras sociales o prepagas?',
-    answer: 'Los tratamientos estéticos generalmente no están cubiertos por obras sociales ni prepagas al ser procedimientos electivos. Sin embargo, ofrecemos facilidades de pago y planes de financiación para que puedas realizar tu tratamiento con comodidad.'
-  },
-  {
-    id: 7,
-    category: 'consulta',
-    question: '¿Cómo es la primera consulta?',
-    answer: 'La primera consulta dura aproximadamente 30-45 minutos. Evaluamos tu caso, discutimos tus objetivos, revisamos tu historia clínica, y te recomendamos el mejor plan de tratamiento. Es un espacio para resolver todas tus dudas sin compromiso. Podés agendar tu consulta por WhatsApp o completando el formulario de contacto.'
-  },
-  {
-    id: 8,
-    category: 'consulta',
-    question: '¿Necesito estudios previos?',
-    answer: 'Para la mayoría de los tratamientos estéticos no invasivos no se requieren estudios previos. Sin embargo, según tu historia clínica y el procedimiento elegido, podríamos solicitar análisis de sangre u otros estudios para garantizar tu seguridad. Esto lo evaluamos en la consulta inicial.'
-  }
 ];
 
-const categories = [
-  { id: 'all', label: 'Todas' },
-  { id: 'tratamientos', label: 'Sobre Tratamientos' },
-  { id: 'recuperacion', label: 'Recuperación' },
-  { id: 'costos', label: 'Costos y Pagos' },
-  { id: 'consulta', label: 'Primera Consulta' }
-];
+export default function FAQs() {
+  const [activeId, setActiveId] = useState(1); // La primera pregunta abierta por defecto
 
-const FAQs = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [openFaq, setOpenFaq] = useState(null);
-
-  const filteredFaqs = activeCategory === 'all' 
-    ? faqData 
-    : faqData.filter(faq => faq.category === activeCategory);
+  // Encontrar la data activa para mostrar su imagen
+  const activeContent = FAQS.find(q => q.id === activeId) || FAQS[0];
 
   return (
     <div className="relative min-h-screen">
-      <AestheticBackground />
       <Navbar />
       
-      <main>
-        <section className="py-24 pt-32">
-          <div className="max-w-5xl mx-auto px-6">
-            
-            {/* TÍTULO */}
-            <div className="text-center mb-16">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif text-brand-primary italic leading-tight mb-4">
-                Preguntas Frecuentes
-              </h1>
-              <p className="text-brand-primary/70 text-lg">
-                Respondemos tus dudas más comunes de forma rápida y clara
-              </p>
-              <div className="mt-4 w-20 h-0.5 bg-brand-primary/40 mx-auto" />
-            </div>
+      <main className="min-h-screen bg-[#F0F2EE] pt-32 pb-20 px-4 md:px-8">
+        
+        <div className="max-w-7xl mx-auto">
+          
+          {/* HEADER */}
+          <div className="mb-16 md:text-center max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-serif text-emerald-950 mb-4">
+              Dudas Frecuentes
+            </h1>
+            <p className="text-gray-600">
+              Seleccioná una pregunta para ver la explicación detallada y su guía visual.
+            </p>
+          </div>
 
-            {/* FILTROS POR CATEGORÍA */}
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => {
-                    setActiveCategory(cat.id);
-                    setOpenFaq(null); // Cerrar todas las FAQs al cambiar categoría
-                  }}
-                  className={`px-5 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-300 border ${
-                    activeCategory === cat.id
-                      ? 'bg-brand-primary border-brand-primary text-brand-white shadow-lg'
-                      : 'bg-white/60 border-brand-primary/20 text-brand-primary/70 hover:border-brand-primary/50 hover:text-brand-primary'
+          {/* --- LAYOUT DIVIDIDO (GRID) --- */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            {/* COLUMNA IZQUIERDA: LISTA DE PREGUNTAS (Ocupa 7 columnas) */}
+            <div className="lg:col-span-7 space-y-4">
+              {FAQS.map((faq) => (
+                <div 
+                  key={faq.id}
+                  className={`group rounded-3xl transition-all duration-300 border overflow-hidden ${
+                    activeId === faq.id 
+                      ? 'bg-white border-emerald-200 shadow-lg' 
+                      : 'bg-white/50 border-transparent hover:bg-white hover:border-emerald-100'
                   }`}
                 >
-                  {cat.label}
-                </button>
+                  <button
+                    onClick={() => setActiveId(faq.id)}
+                    className="w-full flex items-center justify-between p-6 text-left cursor-pointer transition-colors"
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className={`text-sm font-bold px-3 py-1 rounded-full ${
+                         activeId === faq.id ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-200 text-gray-500'
+                      }`}>
+                        0{faq.id}
+                      </span>
+                      <span className={`text-lg md:text-xl font-serif ${
+                        activeId === faq.id ? 'text-emerald-950' : 'text-gray-600'
+                      }`}>
+                        {faq.question}
+                      </span>
+                    </div>
+                    <span className={`transition-transform duration-300 ${
+                      activeId === faq.id ? 'rotate-180 text-emerald-600' : 'text-gray-400'
+                    }`}>
+                       {activeId === faq.id ? <Minus /> : <Plus />}
+                    </span>
+                  </button>
+
+                  {/* RESPUESTA DESPLEGABLE */}
+                  <div 
+                    className={`grid transition-all duration-500 ease-in-out ${
+                      activeId === faq.id ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="p-6 pt-0 text-gray-600 leading-relaxed border-t border-gray-100 mt-2">
+                        
+                        {/* SOLO EN MÓVIL: Mostramos la imagen dentro del acordeón */}
+                        <div className="lg:hidden w-full aspect-[4/5] relative rounded-2xl overflow-hidden mb-6 mt-2">
+                          <OptimizedImage 
+                            src={faq.image} 
+                            alt={faq.question}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+
+                        {/* El Texto de la Respuesta */}
+                        <p>{faq.answer}</p>
+
+                        {/* CTA Pequeño dentro de la respuesta */}
+                        <a href="https://wa.me/549351596064" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-emerald-700 font-medium mt-4 hover:underline text-sm">
+                          Quiero consultar por esto <ArrowRight size={14}/>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
 
-            {/* LISTA DE PREGUNTAS */}
-            <motion.div 
-              className="space-y-4"
-              layout
-            >
-              <AnimatePresence mode="popLayout">
-                {filteredFaqs.map((faq, index) => (
-                  <motion.div
-                    key={faq.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                    className="bg-white/60 backdrop-blur-sm rounded-2xl border border-brand-primary/10 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <button
-                      onClick={() => setOpenFaq(openFaq === faq.id ? null : faq.id)}
-                      className="w-full px-6 py-5 flex items-center justify-between gap-4 text-left hover:bg-brand-primary/5 transition-colors"
-                    >
-                      <h3 className="text-lg font-semibold text-brand-primary flex-1">
-                        {faq.question}
-                      </h3>
-                      <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
-                        openFaq === faq.id 
-                          ? 'bg-brand-primary text-brand-white rotate-180' 
-                          : 'bg-brand-primary/10 text-brand-primary'
-                      }`}>
-                        {openFaq === faq.id ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
-                      </div>
-                    </button>
-                    
-                    <AnimatePresence>
-                      {openFaq === faq.id && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-6 pb-5 text-brand-primary/70 leading-relaxed">
-                            {faq.answer}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </motion.div>
+            {/* COLUMNA DERECHA: LA PLACA VISUAL (Sticky/Fija) (Ocupa 5 columnas) */}
+            <div className="hidden lg:block lg:col-span-5 sticky top-32">
+              <div className="relative w-full aspect-[9/16] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white bg-emerald-900">
+                 {/* Transición suave entre imágenes */}
+                 <div className="absolute inset-0 transition-opacity duration-500">
+                   <OptimizedImage 
+                     key={activeContent.image} // La 'key' fuerza a React a re-renderizar con animación si cambia
+                     src={activeContent.image}
+                     alt="Guía Visual"
+                     className="w-full h-full object-cover animate-in fade-in zoom-in-105 duration-700"
+                     priority={true} // Carga prioritaria para que no parpadee
+                   />
+                 </div>
 
-            {/* CTA FINAL */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="mt-16 text-center bg-brand-primary/5 p-8 rounded-2xl border border-brand-primary/10"
-            >
-              <h3 className="text-2xl font-serif text-brand-primary mb-4">
-                ¿No encontraste lo que buscabas?
-              </h3>
-              <p className="text-brand-primary/70 mb-6">
-                Estamos aquí para resolver todas tus dudas en una consulta personalizada
-              </p>
-              <a 
-                href="/contacto"
-                className="inline-block bg-brand-primary hover:bg-brand-primary/90 text-brand-white px-8 py-4 rounded-full font-bold text-sm uppercase tracking-widest transition-all shadow-lg hover:scale-105"
-              >
-                Agendar Consulta
-              </a>
-            </motion.div>
+                 {/* Decoración: Badge flotante */}
+                 <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-white/50 shadow-lg">
+                    <p className="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1">
+                      GUÍA RÁPIDA
+                    </p>
+                    <p className="text-emerald-950 font-medium leading-tight">
+                      {activeContent.question}
+                    </p>
+                 </div>
+              </div>
+            </div>
+
           </div>
-        </section>
 
-        <Footer />
+        </div>
       </main>
-
+      
+      <Footer />
       <FloatingContact />
     </div>
   );
-};
-
-export default FAQs;
+}
