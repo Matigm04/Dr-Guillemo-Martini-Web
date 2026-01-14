@@ -1,21 +1,26 @@
 import { memo } from 'react';
-import { motion } from 'framer-motion';
+import './SectionHeader.css';
 
+/**
+ * SectionHeader - Componente estandarizado para títulos de sección
+ * Garantiza consistencia tipográfica en toda la aplicación
+ * 
+ * @param {string} title - Título principal (Serif, Italic, brand-primary)
+ * @param {string} subtitle - Subtítulo descriptivo (Sans-serif, grisáceo)
+ * @param {string} titleSize - Tamaño del título (default: 'text-4xl sm:text-5xl md:text-6xl')
+ * @param {boolean} animated - Activar animación CSS (default: true)
+ * @param {React.ReactNode} children - Contenido adicional (ej: decorador, línea separadora)
+ */
 const SectionHeader = memo(({
   title,
   subtitle,
   description,
   titleSize = 'text-4xl sm:text-5xl md:text-6xl',
+  animated = true,
   children
 }) => {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="text-center mb-16"
-    >
+  const content = (
+    <div className="text-center mb-16">
       <h2 className={`${titleSize} font-serif text-brand-primary italic leading-tight mb-6`}>
         {title}
       </h2>
@@ -30,7 +35,13 @@ const SectionHeader = memo(({
         </p>
       )}
       {children}
-    </motion.div>
+    </div>
+  );
+
+  return (
+    <div className={animated ? 'section-header-fade-in' : ''}>
+      {content}
+    </div>
   );
 });
 

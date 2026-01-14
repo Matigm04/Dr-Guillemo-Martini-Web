@@ -139,6 +139,8 @@ const PromoBanner = () => {
       )}
     </>
   );
-};
+});
+
+PromoBanner.displayName = 'PromoBanner';
 
 export default memo(PromoBanner);

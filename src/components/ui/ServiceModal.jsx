@@ -1,5 +1,4 @@
 import { useRef, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { X, Clock, AlertCircle } from "lucide-react"
 import { BeforeAfterSlider } from "./BeforeAfterSlider"
 import { TestimonialCarousel } from "./TestimonialCarousel"
@@ -21,25 +20,16 @@ export function ServiceModal({ treatment, isOpen, onClose }) {
   if (!isOpen || !treatment) return null
 
   return (
-      <AnimatePresence>
-        {isOpen && (
-            <>
+        <>
             {/* Backdrop */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+            <div
                 onClick={onClose}
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-0 md:p-6"
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-0 md:p-6 animate-fade-in"
             >
                 {/* Modal Container */}
-                <motion.div
-                    initial={{ scale: 0.95, opacity: 0, y: 20 }}
-                    animate={{ scale: 1, opacity: 1, y: 0 }}
-                    exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                <div
                     onClick={(e) => e.stopPropagation()}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="relative w-[90%] max-w-6xl max-h-[85vh] md:max-h-[90vh] bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row m-auto"
+                    className="relative w-[90%] max-w-6xl max-h-[85vh] md:max-h-[90vh] bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row m-auto animate-fade-in"
                 >
                      {/* Close Button */}
                     <button
@@ -126,10 +116,8 @@ export function ServiceModal({ treatment, isOpen, onClose }) {
                      </div>
 
 
-                </motion.div>
-            </motion.div>
+                </div>
+            </div>
             </>
-        )}
-      </AnimatePresence>
   )
 }

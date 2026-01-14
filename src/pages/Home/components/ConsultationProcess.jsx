@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
 import { Calendar, Search, Sparkles, Heart } from 'lucide-react';
 import SectionHeader from '../../../components/common/SectionHeader';
+import { AnimateOnScroll } from '../../../hooks/useInView.jsx';
 
 const ConsultationProcess = () => {
   const steps = [
@@ -35,8 +35,8 @@ const ConsultationProcess = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-brand-primary/5">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="py-20">
+      <div className="max-w-7xl mx-auto px-6">
         
         {/* Título */}
         <SectionHeader 
@@ -45,113 +45,92 @@ const ConsultationProcess = () => {
         />
 
         {/* Timeline */}
-        <div className="relative max-w-4xl mx-auto mt-16">
+        <div className="relative max-w-5xl mx-auto">
           
-          {/* Línea vertical central */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-brand-primary/20">
-            <motion.div
-              initial={{ height: 0 }}
-              whileInView={{ height: '100%' }}
-              viewport={{ once: true }}
-              transition={{ duration: 2, ease: 'easeOut' }}
-              className="w-full bg-brand-primary/40"
-            />
+          {/* Línea vertical animada (solo desktop) */}
+          <div className="hidden md:block absolute left-1/2 top-16 bottom-16 w-1 -translate-x-1/2 overflow-hidden">
+            <div className="w-full h-full bg-gradient-to-b from-brand-primary/30 to-brand-primary" />
           </div>
 
           {/* Steps */}
-          <div className="space-y-0">
+          <div className="space-y-16 md:space-y-24">
             {steps.map((step, index) => {
               const Icon = step.icon;
-              const isLeft = index % 2 === 0;
+              const isEven = index % 2 === 0;
 
               return (
-                <motion.div
-                  key={step.number}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="relative grid grid-cols-2 gap-8 items-center min-h-[200px]"
-                >
-                  {/* Contenido Left */}
-                  {isLeft && (
-                    <div className="pr-12 text-right">
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.3 }}
-                        className="inline-block bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-brand-primary/10 shadow-md hover:shadow-lg transition-all"
-                      >
-                        <h3 className="text-2xl font-serif text-brand-primary mb-2">
-                          {step.title}
-                        </h3>
-                        <p className="text-brand-primary/60 leading-relaxed text-sm">
-                          {step.description}
-                        </p>
-                      </motion.div>
-                    </div>
-                  )}
-
-                  {/* Espacio vacío cuando el contenido está a la derecha */}
-                  {!isLeft && <div />}
-
-                  {/* Icono Central */}
-                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-                    <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.3 }}
-                      className="relative"
-                    >
-                      {/* Círculo del icono */}
-                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-brand-primary/10 to-brand-primary/5 flex items-center justify-center shadow-lg border-2 border-white">
-                        <Icon className="w-9 h-9 text-brand-primary" strokeWidth={1.5} />
-                      </div>
+                <AnimateOnScroll key={step.number} animation={isEven ? "fade-right" : "fade-left"} delay={index * 150}>
+                  <div className="relative">
+                    <div className={`md:grid md:grid-cols-2 md:gap-12 items-center ${
+                      isEven ? '' : 'md:grid-flow-dense'
+                    }`}>
                       
-                      {/* Número dentro del círculo */}
-                      <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-brand-primary flex items-center justify-center text-white text-sm font-bold shadow-md">
-                        {step.number}
+                      {/* Contenido */}
+                      <div className={`${isEven ? 'md:text-right' : 'md:col-start-2'}`}>
+                        <div className="bg-white/60 backdrop-blur-sm p-8 rounded-3xl border border-brand-primary/10 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                          {/* Icono móvil */}
+                          <div className="md:hidden flex items-center gap-4 mb-4">
+                            <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center`}>
+                              <Icon className="w-7 h-7 text-brand-primary" strokeWidth={2} />
+                            </div>
+                            <span className="text-5xl font-serif text-brand-primary/20">
+                              {String(step.number).padStart(2, '0')}
+                            </span>
+                          </div>
+
+                          <h3 className="text-2xl sm:text-3xl font-serif text-brand-primary mb-4">
+                            {step.title}
+                          </h3>
+                          <p className="text-brand-primary/70 leading-relaxed text-base sm:text-lg">
+                            {step.description}
+                          </p>
+                        </div>
                       </div>
-                    </motion.div>
-                  </div>
 
-                  {/* Contenido Right */}
-                  {!isLeft && (
-                    <div className="pl-12">
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.3 }}
-                        className="inline-block bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-brand-primary/10 shadow-md hover:shadow-lg transition-all"
-                      >
-                        <h3 className="text-2xl font-serif text-brand-primary mb-2">
-                          {step.title}
-                        </h3>
-                        <p className="text-brand-primary/60 leading-relaxed text-sm">
-                          {step.description}
-                        </p>
-                      </motion.div>
+                      {/* Círculo central con icono (solo desktop) */}
+                      <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                        <div className="relative">
+                          {/* Círculo principal */}
+                          <div className={`relative w-24 h-24 rounded-full bg-gradient-to-br ${step.color} border-4 border-brand-white shadow-xl flex items-center justify-center`}>
+                            <Icon className="w-10 h-10 text-brand-primary" strokeWidth={2.5} />
+                          </div>
+
+                          {/* Número */}
+                          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center border-2 border-brand-white shadow-md">
+                            <span className="text-xs font-bold text-brand-white">
+                              {step.number}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Espaciador (solo desktop) */}
+                      <div className={`hidden md:block ${isEven ? 'md:col-start-2' : ''}`} />
                     </div>
-                  )}
-
-                </motion.div>
+                  </div>
+                </AnimateOnScroll>
               );
             })}
           </div>
         </div>
 
-        {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-16"
-        >
-          <p className="text-brand-primary/70 italic font-serif text-lg mb-6">
-            "Cada consulta es única, cada resultado es natural"
-          </p>
-          <button className="px-8 py-3 bg-brand-primary text-white rounded-full font-medium hover:bg-brand-primary/90 transition-colors shadow-lg hover:shadow-xl">
-            COMENZAR MI CONSULTA
-          </button>
-        </motion.div>
+        {/* CTA */}
+        <AnimateOnScroll animation="fade-up" delay={400}>
+          <div className="text-center mt-20">
+            <div className="bg-gradient-to-r from-brand-primary/5 to-brand-primary/10 p-10 rounded-3xl max-w-3xl mx-auto">
+              <p className="text-brand-primary mb-6 text-xl md:text-2xl font-serif italic font-semibold">
+                "Cada consulta es única, cada resultado es natural"
+              </p>
+              <a
+                href="/contacto"
+                className="inline-block bg-brand-primary hover:bg-brand-primary/90 text-brand-white px-12 py-5 rounded-full text-sm uppercase tracking-widest font-bold hover:scale-105 transition-all shadow-xl hover:shadow-2xl"
+              >
+                Comenzar Mi Consulta
+              </a>
+            </div>
+          </div>
+        </AnimateOnScroll>
+
       </div>
     </section>
   );

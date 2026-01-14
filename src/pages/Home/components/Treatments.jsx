@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, memo, useCallback } from 'react';
 import BounceCards from '../../../components/ui/BounceCards';
 
 // Datos de tratamientos
@@ -52,55 +52,60 @@ const transformStyles3 = [
   'rotate(4deg) translate(100px)'
 ];
 
-const Treatments = () => {
+const Treatments = memo(() => {
   const [cardDimensions, setCardDimensions] = useState({ width: 450, height: 280 });
 
+  const updateDimensions = useCallback(() => {
+    const width = window.innerWidth;
+    if (width < 640) {
+      setCardDimensions({ width: 320, height: 200 });
+    } else if (width < 768) {
+      setCardDimensions({ width: 400, height: 240 });
+    } else {
+      setCardDimensions({ width: 450, height: 280 });
+    }
+  }, []);
+
   useEffect(() => {
-    const updateDimensions = () => {
-      const width = window.innerWidth;
-      if (width < 640) {
-        setCardDimensions({ width: 320, height: 200 });
-      } else if (width < 768) {
-        setCardDimensions({ width: 400, height: 240 });
-      } else {
-        setCardDimensions({ width: 450, height: 280 });
-      }
+    updateDimensions();
+    
+    // Debounce para resize
+    let timeoutId;
+    const debouncedResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(updateDimensions, 150);
     };
 
-    updateDimensions();
-    window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
-  }, []);
+    window.addEventListener('resize', debouncedResize, { passive: true });
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('resize', debouncedResize);
+    };
+  }, [updateDimensions]);
 
   return (
     <section className="py-20 bg-brand-white">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Título */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.4 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-brand-primary italic mb-4">
             Nuestros Tratamientos
           </h2>
           <p className="text-brand-primary/70 text-base md:text-lg max-w-2xl mx-auto">
             Descubrí la excelencia en medicina estética con procedimientos personalizados
           </p>
-        </motion.div>
+        </div>
 
         {/* Grid de tarjetas */}
         <div className="grid md:grid-cols-2 gap-16 md:gap-20">
           {treatments.map((treatment, index) => (
             <motion.div
               key={treatment.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ delay: index * 0.08, duration: 0.4 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-80px", amount: 0.3 }}
+              transition={{ delay: index * 0.1, duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               className="flex flex-col items-center"
             >
               {/* BounceCards */}
@@ -137,6 +142,8 @@ const Treatments = () => {
       </div>
     </section>
   );
-};
+});
+
+Treatments.displayName = 'Treatments';
 
 export default Treatments;

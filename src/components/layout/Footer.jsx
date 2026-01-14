@@ -1,6 +1,7 @@
 import { Instagram, Mail } from 'lucide-react';
+import { memo } from 'react';
 
-const Footer = () => {
+const Footer = memo(() => {
   return (
     <footer className="bg-brand-primary text-brand-white">
       {/* Contenido principal del footer */}
@@ -66,6 +67,8 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';
 
 export default Footer;

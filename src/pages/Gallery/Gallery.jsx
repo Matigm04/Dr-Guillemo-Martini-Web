@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Search } from 'lucide-react';
 import Navbar from '../../components/layout/Navbar';
 import Footer from '../../components/layout/Footer';
@@ -45,12 +44,7 @@ const Gallery = () => {
         </p>
 
         {/* Barra de búsqueda */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="max-w-2xl mx-auto mb-8"
-        >
+        <div className="max-w-2xl mx-auto mb-8 animate-fade-in">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-brand-primary/40 w-5 h-5" />
             <input
@@ -61,17 +55,12 @@ const Gallery = () => {
               className="w-full pl-12 pr-4 py-4 rounded-full bg-white/60 backdrop-blur-sm border border-brand-primary/20 focus:border-brand-primary focus:outline-none text-brand-primary placeholder:text-brand-primary/40"
             />
           </div>
-        </motion.div>
+        </div>
         
         {/* SISTEMA DE FILTROS MEJORADO - DOS FILAS */}
         <div className="mb-12 space-y-4">
           {/* Primera fila: Filtros por tipo de tratamiento técnico */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-3"
-          >
+          <div className="flex flex-wrap justify-center gap-3">
             {advancedFilters.map((filter) => {
               const IconComponent = filter.icon;
               return (
@@ -91,15 +80,10 @@ const Gallery = () => {
                 </button>
               );
             })}
-          </motion.div>
+          </div>
 
           {/* Segunda fila: Filtros por zona del cuerpo */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap justify-center gap-3"
-          >
+          <div className="flex flex-wrap justify-center gap-3">
             {categories.map((cat) => {
               const IconComponent = cat.icon;
               return (
@@ -119,15 +103,11 @@ const Gallery = () => {
                 </button>
               );
             })}
-          </motion.div>
+          </div>
 
           {/* Indicador de filtros activos */}
           {(categoryFilter !== 'todos' || advancedFilter !== 'todos') && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="flex justify-center"
-            >
+            <div className="flex justify-center">
               <button
                 onClick={() => {
                   setCategoryFilter('todos');
@@ -137,7 +117,7 @@ const Gallery = () => {
               >
                 Limpiar filtros
               </button>
-            </motion.div>
+            </div>
           )}
         </div>
 
@@ -145,9 +125,10 @@ const Gallery = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {filteredCases.map((caseItem, index) => (
             <ServiceCard 
-              key={index} 
+              key={caseItem.id || index} 
               treatment={caseItem} 
-              onClick={() => setSelectedCase(caseItem)} 
+              onClick={() => setSelectedCase(caseItem)}
+              index={index}
             />
           ))}
         </div>

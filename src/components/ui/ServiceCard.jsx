@@ -1,19 +1,18 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
+import { AnimateOnScroll } from "../../hooks/useInView.jsx";
 
-export function ServiceCard({ treatment, onClick }) {
+export function ServiceCard({ treatment, onClick, index = 0 }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <motion.div
-      className="group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-sm hover:shadow-xl transition-shadow duration-500 border border-gray-100"
-      onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.3 }}
-    >
+    <AnimateOnScroll animation="fade-up" delay={index * 100}>
+      <div
+        className="group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:scale-[1.02]"
+        onClick={onClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
       {/* Image Container with Before/After Effect */}
       <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
         {/* Before Image */}
@@ -28,11 +27,9 @@ export function ServiceCard({ treatment, onClick }) {
         </div>
         
         {/* After Image with Fade Effect */}
-        <motion.div
-          className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.5 }}
+        <div
+          className="absolute inset-0 transition-opacity duration-500"
+          style={{ opacity: isHovered ? 1 : 0 }}
         >
           <img
             src={treatment.imageAfter}
@@ -41,31 +38,28 @@ export function ServiceCard({ treatment, onClick }) {
             loading="lazy"
             decoding="async"
           />
-        </motion.div>
+        </div>
 
         {/* Before/After Label */}
         <div className="absolute top-4 left-4 z-10">
-          <motion.div
-            className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-xs font-medium text-gray-700"
-            animate={{ opacity: isHovered ? 0 : 1 }}
-            transition={{ duration: 0.3 }}
+          <div
+            className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-xs font-medium text-gray-700 transition-opacity duration-300"
+            style={{ opacity: isHovered ? 0 : 1 }}
           >
             Antes
-          </motion.div>
-          <motion.div
-            className="px-3 py-1 rounded-full bg-emerald-600/90 backdrop-blur-sm text-xs font-medium text-white absolute top-0 left-0"
-            animate={{ opacity: isHovered ? 1 : 0 }}
-            transition={{ duration: 0.3 }}
+          </div>
+          <div
+            className="px-3 py-1 rounded-full bg-emerald-600/90 backdrop-blur-sm text-xs font-medium text-white absolute top-0 left-0 transition-opacity duration-300"
+            style={{ opacity: isHovered ? 1 : 0 }}
           >
             Después
-          </motion.div>
+          </div>
         </div>
 
         {/* Hover Overlay */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent transition-opacity duration-300"
+          style={{ opacity: isHovered ? 1 : 0 }}
         />
       </div>
 
@@ -88,9 +82,9 @@ export function ServiceCard({ treatment, onClick }) {
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
-          {treatment.tags?.slice(0, 3).map((tag, index) => (
+          {treatment.tags?.slice(0, 3).map((tag, tagIndex) => (
             <span
-              key={index}
+              key={tagIndex}
               className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full font-light"
             >
               {tag}
@@ -98,6 +92,7 @@ export function ServiceCard({ treatment, onClick }) {
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
+    </AnimateOnScroll>
   );
 }

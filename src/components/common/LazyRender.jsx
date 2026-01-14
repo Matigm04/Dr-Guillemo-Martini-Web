@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 
 /**
- * Componente que renderiza children solo cuando entra en el viewport
+ * Componente optimizado que renderiza children solo cuando entra en el viewport
  * Usa Intersection Observer para detectar visibilidad
  */
-const LazyRender = ({ 
+const LazyRender = memo(({ 
   children, 
   placeholder = null, 
   rootMargin = '100px',
@@ -13,20 +13,23 @@ const LazyRender = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef(null);
+  const observerRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const element = containerRef.current;
+    if (!element) return;
+
+    observerRef.current = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            if (triggerOnce && containerRef.current) {
-              observer.unobserve(containerRef.current);
-            }
-          } else if (!triggerOnce) {
-            setIsVisible(false);
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (triggerOnce) {
+            observerRef.current?.disconnect();
           }
-        });
+        } else if (!triggerOnce) {
+          setIsVisible(false);
+        }
       },
       {
         rootMargin,
@@ -34,14 +37,10 @@ const LazyRender = ({
       }
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
+    observerRef.current.observe(element);
 
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
-      }
+      observerRef.current?.disconnect();
     };
   }, [rootMargin, threshold, triggerOnce]);
 
@@ -50,6 +49,8 @@ const LazyRender = ({
       {isVisible ? children : placeholder}
     </div>
   );
-};
+});
+
+LazyRender.displayName = 'LazyRender';
 
 export default LazyRender;

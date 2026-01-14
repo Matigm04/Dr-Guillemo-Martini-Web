@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import Navbar from '../../components/layout/Navbar';
@@ -7,6 +6,7 @@ import FloatingContact from '../../components/common/FloatingContact';
 import WhyChooseUs from '../../components/ui/WhyChooseUs';
 import Footer from '../../components/layout/Footer';
 import guillePhoto from '../../assets/guille.JPEG';
+import { AnimateOnScroll } from '../../hooks/useInView.jsx';
 
 function About() {
   const [selectedCard, setSelectedCard] = useState(null);
@@ -46,30 +46,22 @@ function About() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl text-brand-primary italic mb-6">
-              Conocé al Dr. Guillermo Martini
-            </h1>
-            <p className="text-lg md:text-xl text-brand-primary/80 max-w-3xl mx-auto leading-relaxed">
-              Medicina estética con enfoque humano, resultados naturales y compromiso con tu bienestar
-            </p>
-          </motion.div>
+          <AnimateOnScroll animation="fade-up">
+            <div className="text-center mb-16">
+              <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl text-brand-primary italic mb-6">
+                Conocé al Dr. Guillermo Martini
+              </h1>
+              <p className="text-lg md:text-xl text-brand-primary/80 max-w-3xl mx-auto leading-relaxed">
+                Medicina estética con enfoque humano, resultados naturales y compromiso con tu bienestar
+              </p>
+            </div>
+          </AnimateOnScroll>
 
           {/* Historia del Doctor */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid md:grid-cols-2 gap-12 items-center mb-24"
-          >
-            <div className="relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+          <AnimateOnScroll animation="fade-up" delay={200}>
+            <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
+              <div className="relative">
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <img
                   src={guillePhoto}
                   alt="Dr. Guillermo Martini"
@@ -113,7 +105,8 @@ function About() {
                 </ul>
               </div>
             </div>
-          </motion.div>
+          </div>
+          </AnimateOnScroll>
         </div>
       </section>
 
@@ -123,74 +116,58 @@ function About() {
       {/* Detrás de Escena */}
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="font-serif text-4xl md:text-5xl text-brand-primary italic mb-4">
-              Detrás de Escena
+          <AnimateOnScroll animation="fade-up">
+            <div className="text-center mb-16">
+              <h2 className="font-serif text-4xl md:text-5xl text-brand-primary italic mb-4">
+                Detrás de Escena
             </h2>
             <p className="text-brand-primary/70 text-lg">
               Conocé la dinámica diaria de nuestro consultorio
             </p>
-          </motion.div>
+          </div>
+          </AnimateOnScroll>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {behindScenes.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                onClick={() => setSelectedCard(item)}
-                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all cursor-pointer"
-              >
-                <div className="relative h-80">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/90 via-brand-primary/50 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-brand-white">
-                    <h3 className="font-serif text-xl mb-2">{item.title}</h3>
-                    <p className="text-sm text-brand-white/90">{item.description}</p>
-                  </div>
-                  {/* Indicador de click */}
-                  <div className="absolute top-4 right-4 w-8 h-8 bg-brand-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="text-brand-white text-xl">+</span>
+              <AnimateOnScroll key={index} animation="fade-up" delay={index * 150}>
+                <div
+                  onClick={() => setSelectedCard(item)}
+                  className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all cursor-pointer"
+                >
+                  <div className="relative h-80">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/90 via-brand-primary/50 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-brand-white">
+                      <h3 className="font-serif text-xl mb-2">{item.title}</h3>
+                      <p className="text-sm text-brand-white/90">{item.description}</p>
+                    </div>
+                    {/* Indicador de click */}
+                    <div className="absolute top-4 right-4 w-8 h-8 bg-brand-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="text-brand-white text-xl">+</span>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Modal de Historia Completa */}
-      <AnimatePresence>
-        {selectedCard && (
+      {/* Modal de Historia Completa - Simplificado */}
+      {selectedCard && (
           <div className="fixed inset-0 z-[300] flex items-center justify-center p-4">
             {/* Overlay */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div
               onClick={() => setSelectedCard(null)}
               className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             />
 
             {/* Contenido del modal */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: 'spring', duration: 0.5 }}
-              className="relative bg-brand-white w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-3xl shadow-2xl"
-            >
+            <div className="relative bg-brand-white w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-3xl shadow-2xl animate-fade-in">
               {/* Botón cerrar */}
               <button
                 onClick={() => setSelectedCard(null)}
@@ -221,10 +198,9 @@ function About() {
                   {selectedCard.fullStory}
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
         )}
-      </AnimatePresence>
 
       <Footer />
     </div>

@@ -26,28 +26,75 @@
      OPTIMIZACIONES DE RENDIMIENTO CRÍTICAS
      ======================================== */
   
-  /* GPU Acceleration para elementos animados */
-  img, video {
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+  /* GPU Acceleration SOLO para imágenes */
+  img {
+    transform: translateZ(0);
   }
 
-  /* Suavizar animaciones y transiciones */
+  /* Suavizar fuentes */
   * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Optimizar scroll performance */
+  /* SIN scroll-behavior smooth - causa lag */
   html {
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; DESACTIVADO */
   }
+}
 
-  /* Reducir layout shifts */
-  img[loading="lazy"] {
-    content-visibility: auto;
-  }
+/* Animación fade-in simple (solo cuando es necesaria) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* ========================================
+   ANIMACIONES DE SCROLL - Reemplazo de Framer Motion
+   ======================================== */
+
+/* Estado inicial: elementos ocultos */
+.animate-on-scroll-fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll-fade-in {
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+
+.animate-on-scroll-fade-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll-fade-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Estado visible: cuando entra en viewport */
+.animate-on-scroll-fade-up.is-visible,
+.animate-on-scroll-fade-in.is-visible,
+.animate-on-scroll-fade-left.is-visible,
+.animate-on-scroll-fade-right.is-visible,
+.animate-on-scroll-scale.is-visible {
+  opacity: 1;
+  transform: none;
 }
 
 /* --- ELIMINAR MARCA DE AGUA ELFSIGHT (FUERZA BRUTA) --- */

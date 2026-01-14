@@ -1,4 +1,6 @@
-const FloatingContact = () => {
+import { memo } from 'react';
+
+const FloatingContact = memo(() => {
   // Reemplaza este número con el número de WhatsApp de la clínica (con código de país, sin espacios ni guiones)
   // Ejemplo: 5491112345678 para Argentina
   const whatsappNumber = "5491112345678"; // CAMBIAR POR EL NÚMERO REAL
@@ -25,6 +27,8 @@ const FloatingContact = () => {
       </span>
     </a>
   );
-};
+});
+
+FloatingContact.displayName = 'FloatingContact';
 
 export default FloatingContact;

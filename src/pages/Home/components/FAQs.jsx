@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
+import { AnimateOnScroll } from '../../../hooks/useInView.jsx';
 
 const faqData = [
   {
@@ -105,77 +105,55 @@ const FAQs = () => {
         </div>
 
         {/* LISTA DE PREGUNTAS */}
-        <motion.div 
-          className="space-y-4"
-          layout
-        >
-          <AnimatePresence mode="popLayout">
+        <div className="space-y-4">
             {filteredFaqs.map((faq, index) => (
-              <motion.div
-                key={faq.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="bg-white/60 backdrop-blur-sm rounded-2xl border border-brand-primary/10 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-              >
-                <button
-                  onClick={() => setOpenFaq(openFaq === faq.id ? null : faq.id)}
-                  className="w-full px-6 py-5 flex items-center justify-between gap-4 text-left hover:bg-brand-primary/5 transition-colors"
-                >
-                  <h3 className="text-lg font-semibold text-brand-primary flex-1">
-                    {faq.question}
-                  </h3>
-                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
-                    openFaq === faq.id 
-                      ? 'bg-brand-primary text-brand-white rotate-180' 
-                      : 'bg-brand-primary/10 text-brand-primary'
-                  }`}>
-                    {openFaq === faq.id ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
-                  </div>
-                </button>
-                
-                <AnimatePresence>
+              <AnimateOnScroll key={faq.id} animation="fade-up" delay={index * 80}>
+                <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-brand-primary/10 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                  <button
+                    onClick={() => setOpenFaq(openFaq === faq.id ? null : faq.id)}
+                    className="w-full px-6 py-5 flex items-center justify-between gap-4 text-left hover:bg-brand-primary/5 transition-colors"
+                  >
+                    <h3 className="text-lg font-semibold text-brand-primary flex-1">
+                      {faq.question}
+                    </h3>
+                    <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                      openFaq === faq.id 
+                        ? 'bg-brand-primary text-brand-white rotate-180' 
+                        : 'bg-brand-primary/10 text-brand-primary'
+                    }`}>
+                      {openFaq === faq.id ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                    </div>
+                  </button>
+                  
                   {openFaq === faq.id && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 pb-5 text-brand-primary/70 leading-relaxed">
-                        {faq.answer}
+                      <div className="overflow-hidden">
+                        <div className="px-6 pb-5 text-brand-primary/70 leading-relaxed">
+                          {faq.answer}
+                        </div>
                       </div>
-                    </motion.div>
                   )}
-                </AnimatePresence>
-              </motion.div>
+                </div>
+              </AnimateOnScroll>
             ))}
-          </AnimatePresence>
-        </motion.div>
+        </div>
 
         {/* CTA FINAL */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-16 text-center bg-brand-primary/5 p-8 rounded-2xl border border-brand-primary/10"
-        >
-          <h3 className="text-2xl font-serif text-brand-primary mb-4">
-            ¿No encontraste lo que buscabas?
-          </h3>
-          <p className="text-brand-primary/70 mb-6">
-            Estamos aquí para resolver todas tus dudas en una consulta personalizada
-          </p>
-          <a 
-            href="/contacto"
-            className="inline-block bg-brand-primary hover:bg-brand-primary/90 text-brand-white px-8 py-4 rounded-full font-bold text-sm uppercase tracking-widest transition-all shadow-lg hover:scale-105"
-          >
-            Agendar Consulta
-          </a>
-        </motion.div>
+        <AnimateOnScroll animation="fade-up" delay={200}>
+          <div className="mt-16 text-center bg-brand-primary/5 p-8 rounded-2xl border border-brand-primary/10">
+            <h3 className="text-2xl font-serif text-brand-primary mb-4">
+              ¿No encontraste lo que buscabas?
+            </h3>
+            <p className="text-brand-primary/70 mb-6">
+              Estamos aquí para resolver todas tus dudas en una consulta personalizada
+            </p>
+            <a 
+              href="/contacto"
+              className="inline-block bg-brand-primary hover:bg-brand-primary/90 text-brand-white px-8 py-4 rounded-full font-bold text-sm uppercase tracking-widest transition-all shadow-lg hover:scale-105"
+            >
+              Agendar Consulta
+            </a>
+          </div>
+        </AnimateOnScroll>
       </div>
     </section>
   );

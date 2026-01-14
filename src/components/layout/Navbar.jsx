@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Menu, X, ArrowRight } from 'lucide-react';
 
-const Navbar = () => {
+const Navbar = memo(() => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // DEFINICIÓN DE ESTILO PERMANENTE
@@ -83,6 +83,8 @@ const Navbar = () => {
       </div>
     </header>
   );
-};
+});
+
+Navbar.displayName = 'Navbar';
 
 export default Navbar;
