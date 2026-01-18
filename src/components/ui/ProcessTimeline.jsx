@@ -58,9 +58,9 @@ const ProcessTimeline = ({ treatment }) => {
 
       <div className="relative">
         {/* Línea vertical del timeline (solo en desktop) */}
-        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-brand-primary/20 -translate-x-1/2" />
+        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-brand-primary/20 -translate-x-1/2 z-0" />
 
-        <div className="space-y-12">
+        <div className="space-y-12 relative z-10">
           {steps.map((step, index) => (
             <motion.div
               key={index}

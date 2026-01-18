@@ -124,7 +124,7 @@ const PromoBanner = () => {
                   </div>
                   <div>
                     <p className="text-white/90 text-xs md:text-sm uppercase tracking-wider mb-1">Promoción Especial</p>
-                    <h2 className="text-xl md:text-4xl font-serif">{promo.title}</h2>
+                    <h2 className="text-lg md:text-4xl font-serif">{promo.title}</h2>
                   </div>
                 </div>
               </div>

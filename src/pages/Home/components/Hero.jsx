@@ -5,52 +5,39 @@ import './Hero.css';
 // Original: 12.4MB → Optimizado: 1MB (-91.5%)
 const carouselImages = [
   {
-    name: 'IMG_7898',
-    webp: {
-      400: '/src/assets/carrusel/IMG_7898-400w.webp',
-      640: '/src/assets/carrusel/IMG_7898-640w.webp',
-      768: '/src/assets/carrusel/IMG_7898-768w.webp',
-      1024: '/src/assets/carrusel/IMG_7898-1024w.webp',
-      1280: '/src/assets/carrusel/IMG_7898-1280w.webp',
-    },
-    jpg: '/src/assets/carrusel/IMG_7898-1280w.jpg',
-    alt: 'Dr. Guillermo Martini - Consultorio de Medicina Estética',
+    name: 'consultorio-1',
+    jpg: '/images/public/Consultorio/1e031684-8aab-4a5e-a56e-15f5d3b74372.jpg',
+    alt: 'Consultorio Dr. Guillermo Martini - Instalaciones modernas',
   },
   {
-    name: 'IMG_7902',
-    webp: {
-      400: '/src/assets/carrusel/IMG_7902-400w.webp',
-      640: '/src/assets/carrusel/IMG_7902-640w.webp',
-      768: '/src/assets/carrusel/IMG_7902-768w.webp',
-      1024: '/src/assets/carrusel/IMG_7902-1024w.webp',
-      1280: '/src/assets/carrusel/IMG_7902-1280w.webp',
-    },
-    jpg: '/src/assets/carrusel/IMG_7902-1280w.jpg',
-    alt: 'Tratamientos de armonización facial',
+    name: 'consultorio-2',
+    jpg: '/images/public/Consultorio/6476a4cf-60b4-4d86-9640-5a5b2f317744.jpg',
+    alt: 'Consultorio Dr. Guillermo Martini - Área de tratamiento',
   },
   {
-    name: 'IMG_7908',
-    webp: {
-      400: '/src/assets/carrusel/IMG_7908-400w.webp',
-      640: '/src/assets/carrusel/IMG_7908-640w.webp',
-      768: '/src/assets/carrusel/IMG_7908-768w.webp',
-      1024: '/src/assets/carrusel/IMG_7908-1024w.webp',
-      1280: '/src/assets/carrusel/IMG_7908-1280w.webp',
-    },
-    jpg: '/src/assets/carrusel/IMG_7908-1280w.jpg',
-    alt: 'Medicina estética avanzada',
+    name: 'consultorio-3',
+    jpg: '/images/public/Consultorio/6fc8544c-f6ae-4777-a408-723e9a580150.jpg',
+    alt: 'Consultorio Dr. Guillermo Martini - Equipamiento de vanguardia',
   },
   {
-    name: 'IMG_7910',
-    webp: {
-      400: '/src/assets/carrusel/IMG_7910-400w.webp',
-      640: '/src/assets/carrusel/IMG_7910-640w.webp',
-      768: '/src/assets/carrusel/IMG_7910-768w.webp',
-      1024: '/src/assets/carrusel/IMG_7910-1024w.webp',
-      1280: '/src/assets/carrusel/IMG_7910-1280w.webp',
-    },
-    jpg: '/src/assets/carrusel/IMG_7910-1280w.jpg',
-    alt: 'Resultados naturales y duraderos',
+    name: 'consultorio-4',
+    jpg: '/images/public/Consultorio/IMG_7898.JPG',
+    alt: 'Consultorio Dr. Guillermo Martini - Equipamiento de vanguardia',
+  },
+  {
+    name: 'consultorio-5',
+    jpg: '/images/public/Consultorio/IMG_7902.JPG',
+    alt: 'Consultorio Dr. Guillermo Martini - Equipamiento de vanguardia',
+  },
+  {
+    name: 'consultorio-6',
+    jpg: '/images/public/Consultorio/IMG_7908.JPG',
+    alt: 'Consultorio Dr. Guillermo Martini - Equipamiento de vanguardia',
+  },
+  {
+    name: 'consultorio-7',
+    jpg: '/images/public/Consultorio/IMG_7910.JPG',
+    alt: 'Consultorio Dr. Guillermo Martini - Equipamiento de vanguardia',
   },
 ];
 
@@ -63,8 +50,13 @@ const Hero = memo(() => {
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';
-    link.href = carouselImages[0].webp[1280];
-    link.type = 'image/webp';
+    if (carouselImages[0].webp) {
+      link.href = carouselImages[0].webp[1280];
+      link.type = 'image/webp';
+    } else {
+      link.href = carouselImages[0].jpg;
+      link.type = 'image/jpeg';
+    }
     document.head.appendChild(link);
     return () => document.head.removeChild(link);
   }, []);
@@ -94,17 +86,19 @@ const Hero = memo(() => {
             className={`hero-carousel-picture ${i === index ? 'hero-carousel-visible' : 'hero-carousel-hidden'}`}
             style={{ willChange: i === index || i === (index + 1) % carouselImages.length ? 'opacity' : 'auto' }}
           >
-            <source
-              type="image/webp"
-              srcSet={`
-                ${image.webp[400]} 400w,
-                ${image.webp[640]} 640w,
-                ${image.webp[768]} 768w,
-                ${image.webp[1024]} 1024w,
-                ${image.webp[1280]} 1280w
-              `}
-              sizes="(max-width: 480px) 400px, (max-width: 640px) 640px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, 1280px"
-            />
+            {image.webp && (
+              <source
+                type="image/webp"
+                srcSet={`
+                  ${image.webp[400]} 400w,
+                  ${image.webp[640]} 640w,
+                  ${image.webp[768]} 768w,
+                  ${image.webp[1024]} 1024w,
+                  ${image.webp[1280]} 1280w
+                `}
+                sizes="(max-width: 480px) 400px, (max-width: 640px) 640px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, 1280px"
+              />
+            )}
             <img
               src={image.jpg}
               alt={image.alt}
@@ -115,28 +109,30 @@ const Hero = memo(() => {
             />
           </picture>
         ))}
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/30 via-transparent to-brand-primary/20" />
+        {/* 🔥 2. EL NUEVO GRADIENTE MÁGICO (Overlay) 🔥 */}
+        {/* Esto crea una sombra suave desde abajo hacia arriba para resaltar el texto oscuro */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#CED4CA]/90 via-[#CED4CA]/60 to-transparent z-10" />
       </div>
 
       {/* Contenedor de texto centrado */}
-      <div className="relative z-10 text-center max-w-5xl px-6">
+      <div className="relative z-20 text-center max-w-5xl px-6">
         {/* LEMA PRINCIPAL */}
         <div className="mb-6 hero-text-fade-in">
-          <p className="text-brand-primary text-lg md:text-2xl font-light tracking-[0.3em] uppercase drop-shadow-[0_2px_6px_rgba(255,255,255,0.9)]">
+          <p className="text-brand-primary text-lg md:text-2xl font-light tracking-[0.3em] uppercase drop-shadow-sm">
             Tu piel, nuestro lienzo
           </p>
         </div>
 
         {/* NOMBRE DEL DOCTOR */}
         <h1 
-          className="text-4xl sm:text-6xl md:text-8xl font-serif text-brand-primary mb-4 italic leading-tight drop-shadow-[0_2px_8px_rgba(255,255,255,0.8)] hero-text-fade-in-delayed"
+          className="text-4xl sm:text-6xl md:text-8xl font-serif text-brand-primary mb-4 italic leading-tight drop-shadow-sm hero-text-fade-in-delayed"
         >
           Dr. Guillermo Martini
         </h1>
         
         {/* TAGLINE */}
         <p 
-          className="text-brand-primary/90 text-base md:text-xl font-serif italic drop-shadow-[0_1px_4px_rgba(255,255,255,0.7)] hero-text-fade-in-more-delayed"
+          className="text-brand-primary/90 text-base md:text-xl font-serif italic drop-shadow-sm hero-text-fade-in-more-delayed"
         >
           Medicina que renueva tu confianza
         </p>

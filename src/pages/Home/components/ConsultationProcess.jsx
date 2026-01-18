@@ -48,7 +48,7 @@ const ConsultationProcess = () => {
         <div className="relative max-w-5xl mx-auto">
           
           {/* Línea vertical animada (solo desktop) */}
-          <div className="hidden md:block absolute left-1/2 top-16 bottom-16 w-1 -translate-x-1/2 overflow-hidden">
+          <div className="hidden md:block absolute left-1/2 top-16 bottom-16 w-1 -translate-x-1/2 overflow-hidden z-0">
             <div className="w-full h-full bg-gradient-to-b from-brand-primary/30 to-brand-primary" />
           </div>
 
@@ -88,15 +88,18 @@ const ConsultationProcess = () => {
                       </div>
 
                       {/* Círculo central con icono (solo desktop) */}
-                      <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                      <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
                         <div className="relative">
+                          {/* Fondo que tapa la línea */}
+                          <div className="absolute inset-0 w-32 h-32 -left-4 -top-4 rounded-full bg-[#F0F2EE] z-10" />
+                          
                           {/* Círculo principal */}
-                          <div className={`relative w-24 h-24 rounded-full bg-gradient-to-br ${step.color} border-4 border-brand-white shadow-xl flex items-center justify-center`}>
+                          <div className={`relative z-20 w-24 h-24 rounded-full bg-gradient-to-br ${step.color} border-4 border-white shadow-xl flex items-center justify-center`}>
                             <Icon className="w-10 h-10 text-brand-primary" strokeWidth={2.5} />
                           </div>
 
                           {/* Número */}
-                          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center border-2 border-brand-white shadow-md">
+                          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center border-2 border-white shadow-md z-30">
                             <span className="text-xs font-bold text-brand-white">
                               {step.number}
                             </span>

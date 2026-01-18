@@ -1,15 +1,19 @@
 import { useState, memo } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
+
+const NAV_LINKS = [
+  { name: 'INICIO', href: '/' },
+  { name: 'NOSOTROS', href: '/sobre-nosotros' },
+  { name: 'SERVICIOS', href: '/servicios' },
+  { name: 'FAQ\'S', href: '/faqs' },
+  { name: 'CONTACTO', href: '/contacto' },
+];
 
 const Navbar = memo(() => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // DEFINICIÓN DE ESTILO PERMANENTE
-  // Usamos bg-[#F0F2EE]/90 para el color crema con transparencia
-  // backdrop-blur-md para el efecto de vidrio borroso
-  // shadow-sm para separarlo sutilmente del contenido
-  const navbarClasses = "bg-[#F0F2EE]/90 backdrop-blur-md shadow-sm py-3";
-
+  const navbarClasses = "bg-[#F0F2EE]/95 backdrop-blur-md shadow-sm py-3";
   const linkClasses = "text-[#2F3E30] hover:text-[#7A8B56] font-medium text-sm tracking-wide transition-colors duration-300";
 
   return (
@@ -17,27 +21,27 @@ const Navbar = memo(() => {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between">
 
-          {/* 1. LOGO (Izquierda) */}
-          <a href="/" className="relative z-50 group">
+          {/* LOGO */}
+          <Link to="/" className="relative z-50 group" onClick={() => setIsMobileMenuOpen(false)}>
             <div className="w-12 h-12 md:w-14 md:h-14 relative transition-transform duration-300 group-hover:scale-105">
-              <img 
-                src="/images/public/Logo/logo_actual.png" 
-                alt="Dr. Guillermo Martini"
-                className="w-full h-full object-contain"
-              />
+               <img 
+                 src="/images/public/Logo/logo_actual.png"
+                 alt="GN Logo"
+                 className="w-full h-full object-contain"
+               />
             </div>
-          </a>
+          </Link>
 
-          {/* 2. MENÚ ESCRITORIO (Centro) */}
+          {/* MENÚ ESCRITORIO */}
           <nav className="hidden md:flex items-center gap-8">
-            <a href="/" className={linkClasses}>INICIO</a>
-            <a href="/sobre-nosotros" className={linkClasses}>NOSOTROS</a>
-            <a href="/servicios" className={linkClasses}>SERVICIOS</a>
-            <a href="/faqs" className={linkClasses}>FAQ'S</a>
-            <a href="/contacto" className={linkClasses}>CONTACTO</a>
+            {NAV_LINKS.map((link) => (
+              <Link key={link.href} to={link.href} className={linkClasses}>
+                {link.name}
+              </Link>
+            ))}
           </nav>
 
-          {/* 3. CTA (Derecha) - Botón Agendar */}
+          {/* CTA BOTÓN (Escritorio) */}
           <div className="hidden md:block">
             <a 
               href="https://wa.me/549351596064"
@@ -49,38 +53,57 @@ const Navbar = memo(() => {
             </a>
           </div>
 
-          {/* 4. HAMBURGUESA MÓVIL (Derecha Mobile) */}
+          {/* BOTÓN HAMBURGUESA MÓVIL */}
           <button 
-            className="md:hidden text-[#2F3E30] z-50 p-2"
+            className="md:hidden text-[#2F3E30] p-2 relative z-[60]" 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label="Toggle Menu"
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
-      {/* --- MENÚ MÓVIL DESPLEGABLE --- */}
-      <div className={`fixed inset-0 bg-[#F0F2EE] z-40 transform transition-transform duration-500 ease-in-out ${
-        isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}>
-        <div className="flex flex-col items-center justify-center h-full gap-8 text-center p-6">
-          <a href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-serif text-[#2F3E30]">INICIO</a>
-          <a href="/servicios" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-serif text-[#2F3E30]">SERVICIOS</a>
-          <a href="/sobre-nosotros" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-serif text-[#2F3E30]">NOSOTROS</a>
-          <a href="/contacto" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-serif text-[#2F3E30]">CONTACTO</a>
-          <a href="/faqs" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-serif text-[#2F3E30]">FAQ'S</a>
+      {/* MENÚ MÓVIL (Renderizado Condicional) */}
+      {isMobileMenuOpen && (
+        <>
+          {/* Overlay de fondo */}
+          <div 
+            className="fixed inset-0 bg-black/50 z-[48]"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
           
-          <a 
-            href="https://wa.me/549351596064"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 bg-[#2F3E30] text-white px-8 py-3 rounded-full text-lg hover:bg-[#7A8B56] transition-colors duration-300 shadow-xl"
-          >
-            Reservar Turno
-          </a>
-        </div>
-      </div>
+          {/* Contenedor del menú */}
+          <div className="fixed inset-0 z-[49] pointer-events-none">
+            <div 
+              className="absolute top-0 left-0 right-0 bg-[#F0F2EE] min-h-screen pt-24 pb-12 px-6 overflow-y-auto pointer-events-auto"
+            >
+              <nav className="flex flex-col items-center gap-8 w-full mt-8">
+                {NAV_LINKS.map((link) => (
+                  <Link 
+                    key={link.href}
+                    to={link.href} 
+                    onClick={() => setIsMobileMenuOpen(false)} 
+                    className="text-2xl text-[#2F3E30] hover:text-[#7A8B56] font-semibold tracking-wide transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                
+                <a 
+                  href="https://wa.me/549351596064"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="mt-6 bg-[#2F3E30] text-white px-10 py-4 rounded-full text-lg font-bold shadow-xl flex items-center gap-3 hover:bg-[#7A8B56] transition-all hover:scale-105"
+                >
+                  Reservar Turno <ArrowRight size={20}/>
+                </a>
+              </nav>
+            </div>
+          </div>
+        </>
+      )}
     </header>
   );
 });

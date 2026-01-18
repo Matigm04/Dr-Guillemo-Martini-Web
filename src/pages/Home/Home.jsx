@@ -33,50 +33,61 @@ const Home = () => {
       <Navbar />
       
       <main>
-        {/* Hero se carga inmediatamente - crítico para FCP/LCP */}
-        <Hero />
-        
-        {/* PromoBanner se renderiza DESPUÉS del Hero para no bloquear LCP */}
-        <Suspense fallback={null}>
-          <PromoBanner />
-        </Suspense>
-        
-        {/* Proceso de consulta - Timeline animado */}
-        <LazyRender 
-          placeholder={<TreatmentsSkeleton />}
-          rootMargin="200px"
-        >
-          <Suspense fallback={<TreatmentsSkeleton />}>
-            <ConsultationProcess />
+        {/* SECCIÓN 1 (IMPAR): Hero - Fondo #F0F2EE (por defecto en Navbar/Hero) */}
+        <section className="bg-[#F0F2EE]">
+          {/* Hero se carga inmediatamente - crítico para FCP/LCP */}
+          <Hero />
+          
+          {/* PromoBanner se renderiza DESPUÉS del Hero para no bloquear LCP */}
+          <Suspense fallback={null}>
+            <PromoBanner />
           </Suspense>
-        </LazyRender>
+        </section>
         
-        {/* Featured Services - Interactive List con 6 servicios destacados */}
-        <LazyRender 
-          placeholder={<div className="h-screen bg-brand-white/50"></div>}
-          rootMargin="200px"
-        >
-          <Suspense fallback={<div className="h-screen bg-brand-white/50"></div>}>
-            <FeaturedServices />
-          </Suspense>
-        </LazyRender>
+        {/* SECCIÓN 2 (PAR): Proceso - Fondo blanco */}
+        <section className="bg-white">
+          <LazyRender 
+            placeholder={<TreatmentsSkeleton />}
+            rootMargin="200px"
+          >
+            <Suspense fallback={<TreatmentsSkeleton />}>
+              <ConsultationProcess />
+            </Suspense>
+          </LazyRender>
+        </section>
         
-        {/* CallToAction - Invitación a ver servicios */}
-        <LazyRender rootMargin="150px">
-          <Suspense fallback={<div className="h-64 bg-brand-green/5"></div>}>
-            <CallToAction />
-          </Suspense>
-        </LazyRender>
+        {/* SECCIÓN 3 (IMPAR): Servicios - Fondo #F0F2EE */}
+        <section className="bg-[#F0F2EE]">
+          <LazyRender 
+            placeholder={<div className="h-screen bg-brand-white/50"></div>}
+            rootMargin="200px"
+          >
+            <Suspense fallback={<div className="h-screen bg-brand-white/50"></div>}>
+              <FeaturedServices />
+            </Suspense>
+          </LazyRender>
+        </section>
         
-        {/* Instagram solo se carga cuando está cerca del viewport */}
-        <LazyRender 
-          placeholder={<InstagramSkeleton />}
-          rootMargin="150px"
-        >
-          <Suspense fallback={<InstagramSkeleton />}>
-            <InstagramStories />
-          </Suspense>
-        </LazyRender>
+        {/* SECCIÓN 4 (PAR): CTA - Fondo blanco */}
+        <section className="bg-white">
+          <LazyRender rootMargin="150px">
+            <Suspense fallback={<div className="h-64 bg-brand-green/5"></div>}>
+              <CallToAction />
+            </Suspense>
+          </LazyRender>
+        </section>
+        
+        {/* SECCIÓN 5 (IMPAR): Instagram - Fondo #F0F2EE */}
+        <section className="bg-[#F0F2EE]">
+          <LazyRender 
+            placeholder={<InstagramSkeleton />}
+            rootMargin="150px"
+          >
+            <Suspense fallback={<InstagramSkeleton />}>
+              <InstagramStories />
+            </Suspense>
+          </LazyRender>
+        </section>
       </main>
 
       <FloatingContact />
