@@ -1,7 +1,13 @@
 import { useState, useRef } from "react"
 import { motion } from "framer-motion"
 
-export function BeforeAfterSlider({ imageBefore, imageAfter, alt }) {
+export function BeforeAfterSlider({ 
+  imageBefore, 
+  imageAfter, 
+  alt,
+  beforePosition = "center center",
+  afterPosition = "center center"
+}) {
   const [sliderPosition, setSliderPosition] = useState(50)
   const [isDragging, setIsDragging] = useState(false)
   const containerRef = useRef(null)
@@ -54,6 +60,7 @@ export function BeforeAfterSlider({ imageBefore, imageAfter, alt }) {
           src={imageAfter}
           alt={`${alt} - Después`}
           className="object-cover w-full h-full"
+          style={{ objectPosition: afterPosition }}
           draggable={false}
           loading="lazy"
           decoding="async"
@@ -69,6 +76,7 @@ export function BeforeAfterSlider({ imageBefore, imageAfter, alt }) {
           src={imageBefore}
           alt={`${alt} - Antes`}
           className="object-cover w-full h-full"
+          style={{ objectPosition: beforePosition }}
           draggable={false}
           loading="lazy"
           decoding="async"

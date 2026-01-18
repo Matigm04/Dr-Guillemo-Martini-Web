@@ -24,12 +24,12 @@ export function ServiceModal({ treatment, isOpen, onClose }) {
             {/* Backdrop */}
             <div
                 onClick={onClose}
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-0 md:p-6 animate-fade-in"
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-0 md:p-6 animate-fade-in overflow-y-auto"
             >
                 {/* Modal Container */}
                 <div
                     onClick={(e) => e.stopPropagation()}
-                    className="relative w-[90%] max-w-6xl max-h-[85vh] md:max-h-[90vh] bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row m-auto animate-fade-in"
+                    className="relative w-[90%] max-w-6xl my-auto bg-white rounded-2xl md:rounded-3xl shadow-2xl flex flex-col lg:flex-row animate-fade-in"
                 >
                      {/* Close Button */}
                     <button
@@ -41,7 +41,7 @@ export function ServiceModal({ treatment, isOpen, onClose }) {
                     </button>
 
                      {/* Scrollable Content Container */}
-                     <div className="flex flex-col lg:flex-row w-full h-full overflow-y-auto">
+                     <div className="flex flex-col lg:flex-row w-full">
                         
                         {/* Left Side - Image Slider & Testimonials */}
                         <div className="lg:w-1/2 bg-gradient-to-br from-gray-50 to-gray-100 p-0 md:p-6 flex flex-col">
@@ -52,6 +52,8 @@ export function ServiceModal({ treatment, isOpen, onClose }) {
                                         imageBefore={treatment.imageBefore}
                                         imageAfter={treatment.imageAfter}
                                         alt={treatment.title}
+                                        beforePosition={treatment.beforePosition}
+                                        afterPosition={treatment.afterPosition}
                                         className="h-full w-full object-cover" 
                                     />
                                 </div>
